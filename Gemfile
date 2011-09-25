@@ -1,3 +1,3 @@
 source :rubygems
 gem 'rake'
-gem "serious"
+gem 'serious', :git => 'git://github.com/colszowka/serious.git'
