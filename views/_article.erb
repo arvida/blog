@@ -1,0 +1,19 @@
+<div class="article">
+  <% if article.date %>
+    <span class="date right"><%= article.date.formatted %></span>
+  <% end %>
+  <h2><a href="<%= article.url %>"><%= article.title %></a></h2>
+  <div class="body">
+    <% if summary_only %>
+      <%= article.summary.formatted %>
+      <% if article.summary.length != article.body.length %>
+      <% end %>
+    <% else %>
+      <%= article.body.formatted %>
+      <% if article.instance_of?(Serious::Article) %>
+        <%= render_partial :disqus if Serious.disqus %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
