@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'bundler'
+Bundler.require
+
 require 'serious'
 Serious.set :title, 'waiworinao ★ random notes by arvid andersson'
 Serious.set :author, 'Arvid Andersson'
