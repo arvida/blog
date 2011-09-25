@@ -8,7 +8,7 @@ many looks unmaintained but [Brian Hempel](https://github.com/brianhempel) has a
 actively maintaining. Brian has released it as gem called [mongo_session_store-rails3](https://rubygems.org/gems/mongo_session_store-rails3), 
 that we're currently using for <a href="http://unicef.se">the swedish UNICEF site</a>.
 
-My commits: 
+<h3>My commits</h3>
 
 [582154476b28f2b0e59c17e6649cfb8078dec13f](https://github.com/brianhempel/mongo_session_store/commit/582154476b28f2b0e59c17e6649cfb8078dec13f)
  - There was an error in a example in the readme on how you set the <code>config.session_store</code> setting. When setting sessions store your
