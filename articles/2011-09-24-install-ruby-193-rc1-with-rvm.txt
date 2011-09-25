@@ -3,7 +3,7 @@ title: How to install Ruby 1.9.3rc1 with RVM
 ~
 Today Ruby 1.9.3 RC1 was [released](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/388203), 
 it's a faster version of ruby with a couple of new features. Peter Cooper has written 
-a nice summery about the new stuff in ruby 1.9.3 [over at RubyInside](http://www.rubyinside.com/ruby-1-9-3-introduction-and-changes-5428.html).
+a nice summary about the new stuff in ruby 1.9.3 [over at RubyInside](http://www.rubyinside.com/ruby-1-9-3-introduction-and-changes-5428.html).
 
 [Ruby Version Manager](http://beginrescueend.com/) hasn't added RC1 to it's known rubies yet, but 
 you can still install it by specifying the tag [v1_9_3_rc1](https://github.com/ruby/ruby/tree/v1_9_3_rc1) to the rvm install command:
