@@ -1,7 +1,7 @@
 title: Recent open source commits
 
 ~
-Last week a did two small commits on a project called [mongo_session_store](https://github.com/brianhempel/mongo_session_store). 
+Last week I did two small commits on a project called [mongo_session_store](https://github.com/brianhempel/mongo_session_store). 
 It's a Rails session store that uses mongo_mapper, mongoid or the mongo ruby driver to store session data in a mongodb database.
 It was started out by [compressed](https://github.com/compressed/mongo_session_store) about two years ago and has had a lot of forks,
 many looks unmaintained but [Brian Hempel](https://github.com/brianhempel) has a fork that works good with Rails 3.x and that he is 
