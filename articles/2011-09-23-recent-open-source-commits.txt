@@ -16,4 +16,4 @@ can't assign the store with a <code>=</code>.
 
 [66baa116fe3be42f89a234ac2436c02ff717b9b4](https://github.com/brianhempel/mongo_session_store/commit/66baa116fe3be42f89a234ac2436c02ff717b9b4)
  - I also replaced a few <code>rescue LoadError</code> with <code>autoload</code>. It makes the code a bit cleaner and don't make you require 
- files that you want be using.
+ files that you won't be using.
