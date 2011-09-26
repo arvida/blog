@@ -4,12 +4,12 @@ title: Setting Rails ActiveRecord connection encoding to UTF-8 on Heroku
 <a href="#tldr">The tl;dr ☞</a>
 
 When a Rails app is deployed to <a href="http://www.heroku.com/">Heroku</a>
-a ERB file called <code>database.yml</code> is added the apps config directory.
+a ERB file called <code>database.yml</code> is added the app's config directory.
 This ERB file generates the YAML needed for ActiveRecord to make the DB connection based on
 a Heroku config variable called <code>DATABASE_URL</code>. You might recognize this variable
 from when you run <code>heroku config</code> and it is basically a url with settings for the 
 DB connection.
-Unfortunately encoding is not added to the generated YAML by default. 
+Unfortunately utf-8 encoding is not added to the generated YAML by default. 
 
 This is what config/database.yml looks like on Heroku (on the Cedar stack):
 
@@ -64,7 +64,7 @@ eos
 <% end %>
 
 If we read through the code we see that we can add additional attributes to the generated YAML by
-adding query variables to the url. Sweet!
+adding a query string to the url. Sweet!
 
 <span id="tldr">All we have to do is update the <code>DATABASE_URL</code> config variable with our encoding settings:</a>
 
