@@ -8,8 +8,7 @@ a ERB file called <code>database.yml</code> is added to the app's config directo
 This ERB file generates the YAML needed for ActiveRecord to make the DB connection based on
 a Heroku config variable called <code>DATABASE_URL</code>. You might recognize this variable
 from when you run <code>heroku config</code> and it is basically a url with settings for the 
-DB connection.<br>
-Unfortunately utf-8 encoding is not added to the generated YAML by default. 
+DB connection. <em>Unfortunately utf-8 encoding is not added to the generated YAML by default.</em>
 
 This is what config/database.yml looks like on Heroku (on the Cedar stack):
 
