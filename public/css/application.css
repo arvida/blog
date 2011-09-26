@@ -30,6 +30,10 @@ a:hover {
   color: #c3c3c3;
   font-size: 14px;}
 
+.twitter-share-button { 
+  display: block;
+  margin-top: 1em; }
+
 #header { 
   color: #ccc; 
   margin-bottom: 2em; }
