@@ -8,13 +8,13 @@ a nice summary about the new stuff in ruby 1.9.3 [over at RubyInside](http://www
 [Ruby Version Manager](http://beginrescueend.com/) hasn't added RC1 to it's known rubies yet, but 
 you can still install it by specifying the tag [v1_9_3_rc1](https://github.com/ruby/ruby/tree/v1_9_3_rc1) to the rvm install command:
 
-<% highlight do %>
+<% highlight :text do %>
   ~ $ rvm install 1.9.3-tv1_9_3_rc1
 <% end %>
 
 After finishing the install it's pretty nice to add a more rememberable alias for RC1:
 
-<% highlight do %>
+<% highlight :text do %>
  ~ $ rvm alias create ruby-1.9.3-rc1 ruby-1.9.3-tv1_9_3_rc1
  ~ $ rvm use ruby-1.9.3-rc1
 <% end %>
