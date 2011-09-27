@@ -71,4 +71,4 @@ adding a query string to the url. Sweet!
 $ heroku config:add DATABASE_URL="mysql2://user:pass@abc.rds.amazonaws.com/my-db?encoding=utf8&collation=utf8_general_ci" 
 <% end %>
 
-It's pretty clever of Heroku to use the DATBASE_URL like this!
+It's pretty clever of Heroku to use DATBASE_URL like this!
