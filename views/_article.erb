@@ -10,12 +10,12 @@
       <% end %>
     <% else %>
       <%= article.body.formatted %>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="arvid_a">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+      <g:plusone size="medium" annotation="none"></g:plusone>
       <% if article.instance_of?(Serious::Article) %>
         <%= render_partial :disqus if Serious.disqus %>
       <% end %>
     <% end %>
-    <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="arvid_a">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-    <g:plusone size="medium" annotation="none"></g:plusone>
   </div>
 </div>
 <script type="text/javascript">

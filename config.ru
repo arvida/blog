@@ -9,4 +9,5 @@ Serious.set :public, File.join(Dir.getwd, 'public')
 Serious.set :views, File.join(Dir.getwd, 'views')
 Serious.set :cache_timeout, 3600*24
 Serious.set :google_analytics, 'UA-20637790-3'
+Serious.set :disqus, 'blog-arvidandersson'
 run Serious
