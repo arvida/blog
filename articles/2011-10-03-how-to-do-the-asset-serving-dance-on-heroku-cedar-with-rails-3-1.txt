@@ -1,4 +1,4 @@
-title: "How to: Do the asset serving dance on Heroku Cedar with Rails 3.1 and CloudFront"
+title: "Do the asset serving dance on Heroku Cedar with Rails 3.1 and CloudFront"
 
 ~
 The <a href="http://guides.rubyonrails.org/asset_pipeline.html">asset pipeline in Rails 3.1</a> 
