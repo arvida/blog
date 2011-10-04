@@ -74,7 +74,7 @@ You can also add a empty file called <code>public/assets/manifest.yml</code> to 
 if Heroku detects this file it will not run the <code>assets:precompile</code> task on deploy.
 Both these ways are kind if hackish, so choose the one that suits you best.
 
-<h3>2. Enabling asset compiling in production</h3>
+<h3>2. Enable asset compiling in production</h3>
 As we now need to serve the assets through the rails stack
 when CloudFront makes it's first requests we need to enable asset compiling in the production environment, 
 this is done by setting <code>config.assets.compile</code> to <code>true</code> in your production settings:
