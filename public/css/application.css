@@ -17,7 +17,9 @@ h1 {
 h2 { 
   font-family: 'Arial'; 
   font-size: 18px; }
+
 #articles h2 {font-weight:normal;}
+#articles li {margin-bottom: .5em; }
 
 h3, p { font-size: 14px; }
 
