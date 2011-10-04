@@ -34,6 +34,7 @@ a:hover {
   color: #B2246B; }
 
 .date {
+  margin-left: 16px;
   float: right;
   color: #c3c3c3;
   font-size: 14px;}
