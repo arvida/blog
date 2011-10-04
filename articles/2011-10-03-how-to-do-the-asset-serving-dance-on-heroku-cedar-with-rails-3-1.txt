@@ -17,7 +17,7 @@ fast and your dynos don't have to be bothered with serving and compiling assets.
 <h2>How do we solve this in a good way?</h2>
 
 First create a new CloudFront distribution. A great thing with CloudFront is that you can set any
-domain as the source for the distribution. You do this for your heroku hosted app by specifying 
+domain as the source for the distribution. You do this for your Heroku hosted app by specifying 
 the apps domain as the ”Custom Origin” when creating a new distribution. With this set CloudFront
 don't need a S3 bucket, instead it will mirror the assets from the custom origin 
 domain. When the distribution gets a request for a file that it don't have mirrored yet it will just
@@ -97,7 +97,7 @@ use Rack::Deflater
 run MySuperApp::Application
 <% end %>
 
-<b>Done</b>, celebrate with beer. With this setup you get a geo-aware, fast and cachable way to 
-serve your Rails 3.1 assets.
+<b>Done</b>, deploy your app and celebrate with beer. With this setup you get a geo-aware, fast and 
+cachable way to serve your Rails 3.1 assets.
 
 <em>Thanks to <a href="https://twitter.com/#!/joeljunstrom">@joeljunstrom</a> for the proofreading!</em>
