@@ -22,7 +22,7 @@ the apps domain as the ”Custom Origin” when creating a new distribution. Wit
 don't need a S3 bucket, instead it will mirror the assets from the custom origin 
 domain. When the distribution gets a request for a file that it don't have mirrored yet it will just
 issue the same request to your app, cache the result and return it. This also makes it possible to 
-serve gzipped versions of your assets as CloudFront forwards the clients request headers and rails 
+serve gzipped versions of your assets as CloudFront forwards the clients request headers and rack 
 can serve gzipped versions of your assets if the client supports it 
 (<a href="#ggg-zippd">more on this further down</a>).
 
@@ -74,7 +74,7 @@ You can also add a empty file called <code>public/assets/manifest.yml</code> to 
 if Heroku detects this file it will not run the <code>assets:precompile</code> task on deploy.
 Both these ways are kind if hackish, so choose the one that suits you best.
 
-<h3>2. Enable asset compiling in production</h3>
+<h3>2. Enable on-the-fly asset compiling in production</h3>
 As we now need to serve the assets through the rails stack
 when CloudFront makes it's first requests we need to enable asset compiling in the production environment, 
 this is done by setting <code>config.assets.compile</code> to <code>true</code> in your production settings:
