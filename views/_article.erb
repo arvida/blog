@@ -10,8 +10,21 @@
       <% end %>
     <% else %>
       <%= article.body.formatted %>
-      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="arvid_a">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-      <g:plusone size="medium" annotation="none"></g:plusone>
+      <div id="share">
+        <div class="service">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="arvid_a">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+      </div>
+      <div class="service">
+        <g:plusone size="medium" annotation="none"></g:plusone>
+      </div>
+        <div class="service" id="reddit">
+        <script type="text/javascript">
+          reddit_url = "http://blog.arvidandersson.se<%= article.url %>";
+          reddit_css ="margin-top: 4px;"
+        </script>
+        <script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+        </div>
+      </div>
       <% if article.instance_of?(Serious::Article) %>
         <%= render_partial :disqus if Serious.disqus %>
       <% end %>
