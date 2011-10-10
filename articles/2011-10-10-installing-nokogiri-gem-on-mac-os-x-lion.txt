@@ -35,7 +35,7 @@ The instructions didn't work for the above error and I ended up doing the follow
 Linking /usr/local/Cellar/libiconv/1.14... 17 symlinks created
 <% end %>
 
-The trick is to do the <code>brew link</code> command, this adds the libiconv to the homebrew path so the compiler
+The trick is to do the <code>brew link</code> command, this adds libiconv to the homebrew path so the compiler
 can find the lib and header files. After running those homebrew commands the nokogiri installation worked: 
 
 <% highlight :text do %>
