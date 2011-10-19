@@ -116,4 +116,4 @@ end
 
 You can checkout the source code for this [on GitHub](https://github.com/arvida/emoji-cheat-sheet.com/blob/master/Rakefile). It's pretty basic stuff that has room for improvements and tests, but it makes deploying a static site like [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com) to S3 much easier.
 
-I think S3 is a pretty neat solution for hosting static sites, I like how easy it is to specify http headers for files and setting up a new site. The only downside is that it isn't super fast, but is easy to fix by creating a CloudFront distribution that uses the S3 bucket as origin and pointing your domain the CloudFront distribution instead.
+I think S3 is a pretty neat solution for hosting static sites, I like how easy it is to specify http headers for files and setting up a new site. The only downside is that it isn't super fast, but that is easy to fix by creating a CloudFront distribution that uses the S3 bucket as origin and pointing your domain the CloudFront distribution instead.
