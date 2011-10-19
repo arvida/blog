@@ -2,11 +2,10 @@ title: Hosting a static site on S3 with some ruby help
 
 ~
 
-I recently did a one pager called [emoji-cheat-sheet.com](http://Emoji-cheat-sheet.com). The background to why I made this site is pretty simple, I like those little [emoji emoticons](http://en.wikipedia.org/wiki/Emoji). Both 37signals [Campfire](http://campfirenow.com/) and [GitHub](https://github.com/blog/816-emoji) supports emojis by using a syntax like <code>:cake:</code> which will generate a <img src="http://www.emoji-cheat-sheet.com/graphics/emojis/cake.png" height="22" width="22">. <br>
-The problem is that there are quite a few emojis that you can use on these services and they support a different set of emoticons.
-I created a little cheat sheet that just lists which ones are supported on each service and I put it online if someone else would be interested in something like that. If you got flash enabled you can just click the emoji code and it will be copied to your clipboard using [zClip](http://www.steamdev.com/zclip/). 
+I recently did a one pager called [emoji-cheat-sheet.com](http://Emoji-cheat-sheet.com). The background to why I made this site is pretty simple, I like those little [emoji emoticons](http://en.wikipedia.org/wiki/Emoji). Both 37signals [Campfire](http://campfirenow.com/) and [GitHub](https://github.com/blog/816-emoji) supports emojis by using a syntax like <code>:cake:</code> which will generate a <img src="http://www.emoji-cheat-sheet.com/graphics/emojis/cake.png" height="22" width="22">. The problem is that there are quite a few emojis that you can use on these services and they support a different set of emoticons.<br>
+I created a little cheat sheet that just lists which ones are supported on each service and put it online if someone else would be interested in it. If you got flash enabled you can just click the emoji code and it will be copied to your clipboard using [zClip](http://www.steamdev.com/zclip/). 
 
-The site is basically one html file, a css file, a flash, a bit of javascript and a some graphic files. You can check out the source on GitHub at [github.com/arvida/emoji-cheat-sheet.com](http://github.com/arvida/emoji-cheat-sheet.com). <br>As someone who usually writes ruby all day it's a pretty fun to do a small project where you are forced to think a bit about and try to do the web design for a site.
+The site is basically one html file, a css file, a flash, a bit of javascript and a some graphic files. You can check out the source code on GitHub at [github.com/arvida/emoji-cheat-sheet.com](http://github.com/arvida/emoji-cheat-sheet.com). <br>As someone who usually writes ruby all day it's a pretty fun to do a small project where you are forced to think a bit about and try to do the web design for a site.
 
 ## S3 for hosting
 
