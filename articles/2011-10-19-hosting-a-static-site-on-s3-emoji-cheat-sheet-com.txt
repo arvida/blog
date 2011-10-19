@@ -14,7 +14,7 @@ As emoji-cheat-sheet.com is just a static site I decided to try out using Amazon
 * __You can't use naked domains__ S3 only works with CNAME records and I had to add a redirect for http://emoji-cheat-sheet.com that goes to http://www.emoji-cheat-sheet.com.
 * __S3 defaults some files to <code>binary/octet-stream</code>__ If a browser get this mime-type for a file it expects it to be a binary file that should be downloaded to disk.
 
-### The setup
+### How to do the S3 setup
 
 Log into your AWS account and create a bucket that has the the same name as the domain your want to host on S3. The domain must include a ”www.” or be a subdomain.
 Select your newly created bucket and click ”Properties” in the ”Action” popup menu. Choose the ”Website” tab, enable it and enter ”index.html” as the index document filename. Copy the the endpoint url and create a CNAME record for your domain that points to the endpoint. Now you just need to upload the files to the bucket.
