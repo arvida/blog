@@ -9,7 +9,7 @@ The site is basically one html file, a css file, a flash, a bit of javascript an
 
 ## S3 for hosting
 
-As emoji-cheat-sheet.com is just a static site I decided to try out using Amazon's [S3](http://aws.amazon.com/s3/) for hosting the it. There was basically two tiny issues I encountered:
+As emoji-cheat-sheet.com is just a static site I decided to try out using Amazon's [S3](http://aws.amazon.com/s3/) for hosting it. There was basically two tiny issues I encountered:
 
 * __You can't use naked domains__ S3 only works with CNAME records and I had to add a redirect for http://emoji-cheat-sheet.com that goes to http://www.emoji-cheat-sheet.com.
 * __S3 defaults some files to <code>binary/octet-stream</code>__ If a browser get this mime-type for a file it expects it to be a binary file that should be downloaded to disk.
