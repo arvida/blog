@@ -18,14 +18,16 @@ h2 {
   font-family: 'Arial'; 
   font-size: 18px; }
 
+h3 { font-size: 16px; }
+p, ul { font-size: 14px; }
+
+ul#articles {
+  list-style: none; 
+  padding-left: 0; }
+
 #articles h2 {font-weight:normal;}
 #articles li {margin-bottom: .5em; }
-
-h3, p { font-size: 14px; }
-
-ul, li {
-  list-style-type: none; }
-ul { padding-left: 0; }
+.article .body ul {padding-left: 0;}
 
 a {
   text-decoration: none;
