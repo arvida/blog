@@ -12,7 +12,6 @@ expires_in 1.year, :public => true
 response.header['Date'] = Time.now.httpdate
 send_file(file.path, 
   :filename => file.name, 
-  :disposition => 'inline', 
   :type => file.mime_type)
 <% end %>
 
