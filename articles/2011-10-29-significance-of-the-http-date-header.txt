@@ -8,11 +8,9 @@ It turn's out that the problem is that <code>#send_file</code> doesn't include a
 It's easy to fix, just add a Date header to the response  where you use #send_file. For example:
 
 <% highlight :ruby do %>
-expires_in 1.year, :public => true
+expires_in 1.year, public: true
 response.header['Date'] = Time.now.httpdate
-send_file(file.path, 
-  :filename => file.name, 
-  :type => file.mime_type)
+send_file file.path, filename: file.name, type: file.mime_type
 <% end %>
 
 It is important that your use <code>#httpdate</code> when setting the date header so the returned string can be understod by the client.
