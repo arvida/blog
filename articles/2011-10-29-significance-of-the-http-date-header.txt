@@ -1,0 +1,21 @@
+title: Significance of the HTTP Date header
+
+~
+I have been doing some work over the last week that involves serving files with ActionController's [#send_file](http://api.rubyonrails.org/classes/ActionController/DataStreaming.html#method-i-send_file) method. One problem I stumbled upon was that my <code>Cache-Control</code> headers didn't get respected and I was getting <code>X-Cache: Miss from cloudfront</code> repeatedly when requesting a generated file through [CloudFront](http://aws.amazon.com/cloudfront).
+
+It turn's out that the problem is that <code>#send_file</code> doesn't include a Date HTTP header when creating the HTTP response headers. **The Date header is used to tell the client  at what time the response was generated and it is this value that the client uses when calculating how long the local cache of the reponse is going to be valid.** If it is not included the clients browser will not cache the response according to the <code>Cache-Control</code> header and CloudFront won't know how long to save the file.
+
+It's easy to fix, just add a Date header to the response  where you use #send_file. For example:
+
+<% highlight :ruby do %>
+expires_in 1.year, :public => true
+response.header['Date'] = Time.now.httpdate
+send_file(file.path, 
+  :filename => file.name, 
+  :disposition => 'inline', 
+  :type => file.mime_type)
+<% end %>
+
+It is important that your use <code>#httpdate</code> when setting the date header so the returned string can be understod by the client.
+
+You can read more about the Date header in [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
