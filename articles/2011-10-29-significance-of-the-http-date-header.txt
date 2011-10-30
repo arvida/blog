@@ -16,3 +16,12 @@ send_file file.path, filename: file.name, type: file.mime_type
 It is important that your use <code>#httpdate</code> when setting the date header so the returned string can be understod by the client.
 
 You can read more about the Date header in [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+
+### UPDATE - October 30th 2011
+
+After a bit of research I found that this issue looks to be [related to that I am using passenger and nginx](http://code.google.com/p/phusion-passenger/issues/detail?id=485) in the project where I noticed the missing Date header. I looks like the passenger guys agrees that this is an issue and plans to fix it.
+
+This issue is kind of interesting; for example [unicorn](http://unicorn.bogomips.org/) sets the Date header and [thin](http://code.macournoyer.com/thin/) doesn't. 
+*It raises the question: **What part of the stack is responsible for setting what response header?*** 
+
+The answer is pretty easy for most of the response headers but with Date I am not so sure. If I use <code>expires_in</code> in my Rails app I expect that the Date header is set but if I just do a plain <code>response['Cache-Control'] = "public, max-age=3600"</code> in a [Sinatra](http://www.sinatrarb.com/) app I am not sure if Sinatra should be responsible for the Date header. Maybe it should be the front webserver that ensures that the Date header is always set? I guess some more research is needed ;)
