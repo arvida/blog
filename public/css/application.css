@@ -37,6 +37,11 @@ a {
 a:hover {
   color: #B2246B; }
 
+table { 
+  width: 48%;
+  font-size: 14px;}
+  table th { color: #999;}
+
 .date {
   margin-left: 16px;
   float: right;
