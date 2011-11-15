@@ -7,7 +7,7 @@ Since I put [Emoji-cheat-sheet.com](http://www.emoji-cheat-sheet.com) online on 
 
 ## Click stats
 
-After the site had been online a few days I added click tracking on the emoji's and Campfire sounds just to be able to see which one's people click the most. Got no real use for the stats it's just for fun.
+After the site had been online a few days I added click tracking on the emoji's and Campfire sounds to be able to see which one's people click the most. Got no real use for the stats it's just for fun.
 
 ### Emojis
 
@@ -39,7 +39,7 @@ After the site had been online a few days I added click tracking on the emoji's 
 |9	|/play rimshot|	 32
 |10 |/play crickets|	 27	
 
-I guess you can interperate these stats in a lot of different ways. The campfire sounds looks to be less easy to remember or more popular then the actual emojis. I think it is pretty sweet that :koala: and :nail_care: are so popular, I wouldn't have guessed that those would make it to the top ten.
+I guess you can interpret these stats in a lot of different ways. The campfire sounds looks to be less easy to remember or more popular then the actual emojis. I think it is pretty sweet that :koala: and :nail_care: are so popular, I wouldn't have guessed that those would make it to the top ten.
 
 ### Tracking clicks
 
