@@ -21,6 +21,10 @@ h2 {
 h3 { font-size: 16px; }
 p, ul { font-size: 14px; }
 
+p>code { 
+  padding: 1px 2px;
+  background: #f8f8f8; }
+
 ul#articles {
   list-style: none; 
   padding-left: 0; }
