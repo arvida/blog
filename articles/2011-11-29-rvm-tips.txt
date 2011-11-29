@@ -2,11 +2,11 @@ title: Ruby Version Manager quick tips
 
 ~
 
-I have been using [Ruby Version Manager (RVM)](http://beginrescueend.com/) for over a year and I think it is a great tool that makes life easier for me as a developer. It wasn't until recently that I started to checkout the different configuration options for it.
+I have been using [Ruby Version Manager (RVM)](http://beginrescueend.com/) for over a year and I think it is a great tool that makes life easier for me as a ruby developer. It wasn't until recently that I started to checkout the different configuration options for it.
 
 ## Configuration
 
-RVM uses a file called ```.rvmrc``` in your home directory for global configuration. If you need system wide configuration your can use ```/etc/rvmrc```, but the file in your home directory will overwrite the settings in /etc/rvmrc if both exists. 
+RVM uses a file called ```.rvmrc``` in your home directory for global configuration. If you need system wide configuration your can use ```/etc/rvmrc```. The .rvmrc in your home directory will overwrite the settings in /etc/rvmrc if both exists. 
 
 My ```.rvmrc``` looks like this
 
