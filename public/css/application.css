@@ -18,20 +18,14 @@ h2 {
   font-family: 'Arial'; 
   font-size: 18px; }
 
-h3 { font-size: 16px; }
-p, ul { font-size: 14px; }
-
-p>code { 
-  padding: 1px 2px;
-  background: #f8f8f8; }
-
-ul#articles {
-  list-style: none; 
-  padding-left: 0; }
-
 #articles h2 {font-weight:normal;}
 #articles li {margin-bottom: .5em; }
-.article .body ul {padding-left: 0;}
+
+h3, p { font-size: 14px; }
+
+ul, ol{
+  font-size: 14px;
+  padding-left: 18px; }
 
 a {
   text-decoration: none;
@@ -40,11 +34,6 @@ a {
 
 a:hover {
   color: #B2246B; }
-
-table { 
-  width: 48%;
-  font-size: 14px;}
-  table th { color: #999;}
 
 .date {
   margin-left: 16px;
