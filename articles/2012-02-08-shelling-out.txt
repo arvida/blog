@@ -1,4 +1,4 @@
-title: "Shelling"
+title: "Using the shell for fun and profit"
 
 ~
 
