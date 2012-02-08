@@ -2,7 +2,7 @@ title: "Using the shell for fun and profit"
 
 ~
 
-A few basic shortcuts and commands I have picked up over the years that helped me become more efficient when working in a *nix shell. 
+A few basic shortcuts and commands I have picked up over the years that have helped me become more efficient when working in a *nix shell. 
 
 _The shortcuts and commands in this post should work with both [bash](http://www.gnu.org/software/bash/bash.html) and [zsh](http://www.zsh.org/)._
 
