@@ -31,3 +31,7 @@ The answer is pretty easy for most of the response headers but with Date I am no
 I did a patch for Rails last week that ensures that the Date header is sent when you use <code>expires_in</code>. You can check out [the pull request over at github](https://github.com/rails/rails/pull/3479).  
 
 If you got any comments or thoughts on this issue, let me know as I think it's quite a interesting topic and would like to hear what other people think of this. 
+
+### UPDATE - February 18th 2012
+
+The patch was accepted and merged today. Yay! 
