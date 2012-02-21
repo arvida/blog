@@ -21,9 +21,9 @@ Select your newly created bucket and click ”Properties” in the ”Action” 
 
 ## Making it easy to deploy with ruby
 
-I did some quick googling trying to find a simple automated solution for uploading and minimizing files to S3 for sites like this but I didn't really find any solution. I ended up hacking together a little rake task using the excellent [fog gem](https://github.com/geemus/fog) for S3 interaction, detecting mime types with the old [mime-types](https://rubygems.org/gems/mime-types) gem and minimizing the css and js with [yuicompressor](http://developer.yahoo.com/yui/compressor/) (you can [install it using homebrew](https://github.com/mxcl/homebrew/blob/master/Library/Formula/yuicompressor.rb) these days). 
+I did some quick googling trying to find a simple automated solution for uploading and minimizing files to S3 for sites like this but I didn't really find any solution. I ended up hacking together a little rake task using the excellent [fog gem](https://github.com/geemus/fog) for S3 interaction, detecting mime types with the old [mime-types](https://rubygems.org/gems/mime-types) gem and minimizing the css and js with [yuicompressor](http://developer.yahoo.com/yui/compressor/) (you can [install it using homebrew](https://github.com/mxcl/homebrew/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Library/Formula/yuicompressor.rb) these days). 
 
-It is basically the two classes [Site](https://github.com/arvida/emoji-cheat-sheet.com/blob/master/Rakefile#L18) and [SiteFile](https://github.com/arvida/emoji-cheat-sheet.com/blob/master/Rakefile#L100) wrapped into a module called [SimpleS3Deploy](https://github.com/arvida/emoji-cheat-sheet.com/blob/master/Rakefile#L12) for simple interaction.
+It is basically the two classes [Site](https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile#L18) and [SiteFile](https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile#L100) wrapped into a module called [SimpleS3Deploy](https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile#L12) for simple interaction.
 
 <% highlight :ruby do %>
 module SimpleS3Deploy
@@ -114,6 +114,6 @@ task :deploy do
 end
 <% end %>
 
-You can checkout the source code for this [on GitHub](https://github.com/arvida/emoji-cheat-sheet.com/blob/master/Rakefile). It's pretty basic stuff that has room for improvements and tests, but it makes deploying a static site like [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com) to S3 much easier.
+You can checkout the source code for this [on GitHub](https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile). It's pretty basic stuff that has room for improvements and tests, but it makes deploying a static site like [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com) to S3 much easier.
 
 I think S3 is a pretty neat solution for hosting static sites, I like how easy it is to specify http headers for files and setting up a new site. The only downside is that it isn't super fast, but that is easy to fix by creating a CloudFront distribution that uses the S3 bucket as origin and pointing your domain the CloudFront distribution instead.
