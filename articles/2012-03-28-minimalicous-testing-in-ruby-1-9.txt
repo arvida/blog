@@ -566,15 +566,15 @@ To make the output of running your MiniTest specs a bit more pretty and informat
 
 ### Rails
 
-As you might have guessed MiniTest::Spec should work great for testing Rails apps. There is a gem called [minitest-rails](https://github.com/blowmage/minitest-rails) that lets you use MiniTest::Spec for testing Rails 3 projects. Also checkout a post named [A better way of testing Rails application with minitest](http://blog.rawonrails.com/2012/01/better-way-of-testing-rails-application.html) and one called [Using MiniTest::Spec With Rails](http://metaskills.net/2011/03/26/using-minitest-spec-with-rails/) for more info on getting started with this.
+As you might have guessed MiniTest::Spec should work great for testing Rails apps. There is a gem called [minitest-rails](https://github.com/blowmage/minitest-rails) that lets you use MiniTest::Spec for testing Rails 3 projects. Also checkout a blog post named [A better way of testing Rails application with minitest](http://blog.rawonrails.com/2012/01/better-way-of-testing-rails-application.html) by Rafał Wrzochol and one called [Using MiniTest::Spec With Rails](http://metaskills.net/2011/03/26/using-minitest-spec-with-rails/) by Ken Collins for more info on getting started with this.
 
 There are also [a RailsCast Pro episode](http://railscasts.com/episodes/327-minitest-with-rails) and Avdi Grimm's excellent book [Objects on Rails](http://objectsonrails.com/) that includes a lot of examples on using MiniTest::Spec in a Rails app.
 
-### More
+### Even more
 
 Two very recomended talks covering MiniTest are Ryan Davis [Size Doesn't Matter](http://confreaks.com/videos/618) at Cascadia Ruby 2011 and [Aaron Patterson](http://tenderlovemaking.com/)'s [Hidden Gems of Ruby 1.9](http://www.confreaks.com/videos/367-gogaruco2010-hidden-gems-of-ruby-1-9) from Golden Gate Ruby Conference 2010.
 
-There are a good introduction article on MiniTest::Spec called [A MiniTest::Spec Tutorial: Elegant Spec-Style Testing That Comes With Ruby](http://www.rubyinside.com/a-minitestspec-tutorial-elegant-spec-style-testing-that-comes-with-ruby-5354.html) over at [Ruby Inside](http://rubyinside.com/).
+There are a good introduction article on MiniTest::Spec called [A MiniTest::Spec Tutorial: Elegant Spec-Style Testing That Comes With Ruby](http://www.rubyinside.com/a-minitestspec-tutorial-elegant-spec-style-testing-that-comes-with-ruby-5354.html) by Peter Cooper over at [Ruby Inside](http://rubyinside.com/).
 
 A tutorial on [writing your own MiniTest::Spec expectations](https://gist.github.com/2032303).
 
