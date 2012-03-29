@@ -4,7 +4,7 @@ title: Minimalicious testing in Ruby 1.9
 
 In this blog post I am going to try to do a introduction on writing tests in the style of [Behavior Driven Development (BDD) specifications](http://en.wikipedia.org/wiki/Behavior_Driven_Development), also called specs, with ruby's [__MiniTest__](https://github.com/seattlerb/minitest) framework. BDD is a big subject and I am going to focus on the tools MiniTest provides for specifying the behaviour of code. There are a lot more to BDD than what is mentioned in this blog post.
 
-_I got the idea for the blog post while I was reading the excellent [The RSpec book](http://pragprog.com/book/achbd/the-rspec-book). Even though it is about a different testing framework called [RSpec](http://rspec.info/) I highly recommend reading it if you are interested in [automated testing](http://en.wikipedia.org/wiki/Test_automation) as it gives a great introduction on writing tests and what to think about when doing so. This blog post is kind of a  summery of my notes and thoughts that come up when looking into MiniTest::Spec while reading the the RSpec book and also a few bits I have picked up on my own journey towards learning to test my code better._
+_I got the idea for the blog post while I was reading the excellent [The RSpec book](http://pragprog.com/book/achbd/the-rspec-book). Even though it is about a different testing framework called [RSpec](http://rspec.info/) I highly recommend reading it if you are interested in [automated testing](http://en.wikipedia.org/wiki/Test_automation) as it gives a great introduction on writing tests and what to think about when doing so. This blog post is kind of a  summary of my notes and thoughts that come up when looking into MiniTest::Spec while reading the the RSpec book and also a few bits I have picked up on my own journey towards learning to test my code better._
 
 ## MiniTest?
 
@@ -558,7 +558,7 @@ If you got code or setup that you share between the specs it is common practice 
 
 When you have a big suit of tests that takes some time to you can hit `CTRL-T` while the test are running get a progress report.
 
-## More resources
+## Resources
 
 ### Prettifying the output
 
@@ -570,7 +570,7 @@ As you might have guessed MiniTest::Spec should work great for testing Rails app
 
 There are also [a RailsCast Pro episode](http://railscasts.com/episodes/327-minitest-with-rails) and Avdi Grimm's excellent book [Objects on Rails](http://objectsonrails.com/) that includes a lot of examples on using MiniTest::Spec in a Rails app.
 
-### Even more
+### More
 
 Two very recomended talks covering MiniTest are Ryan Davis [Size Doesn't Matter](http://confreaks.com/videos/618) at Cascadia Ruby 2011 and [Aaron Patterson](http://tenderlovemaking.com/)'s [Hidden Gems of Ruby 1.9](http://www.confreaks.com/videos/367-gogaruco2010-hidden-gems-of-ruby-1-9) from Golden Gate Ruby Conference 2010.
 
