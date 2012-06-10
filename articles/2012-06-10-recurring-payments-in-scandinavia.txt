@@ -11,7 +11,7 @@ After a quite a lot of research we ended up using three different services to so
 * [QuickPay](http://quickpay.net) as payment service provider
 * [Euroline](http://www.euroline.se/) to manage the actual transactions
 
-With these three services setup it is pretty easy to do recurring payments. When new users sign up they get assigned to a plan in trialing mode (a subscription) on Chargify, if they want to start to pay for the service after the trial is over they add their credit card details using Chargify's [hosted pages](http://docs.chargify.com/hosted-page-integration) and then we get callbacks to the app letting us know how the state changes on each users subscription. QuickPay and Euroline handles the actual transactions in the background.
+With these three services setup it is pretty easy to do recurring payments, you just have to integrate with Chargify's API which is not a big issue once you have wrapped your head around it. When new users sign up they get assigned to a plan in trialing mode (a subscription) on Chargify, if they want to start to pay for the service after the trial is over they add their credit card details using Chargify's [hosted pages](http://docs.chargify.com/hosted-page-integration) and then we get callbacks to the app letting us know how the state changes on each users subscription. QuickPay and Euroline handles the actual transactions in the background.
 
 ## A few pointers 
 
