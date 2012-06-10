@@ -27,4 +27,6 @@ You can check that the QuickPay integration is working if you open up the Tools 
 
 I really hope that someone is working on a sweet service for handling the whole chain of accepting payments online that works outside the US. A part from recurring billing and one time charges I also want to be able to do metered billing (the customer pays for usage). 
 
-The solution with Chargify, QuickPay and Euroline should work good but there are a bit of paper work and research needed to get it up and running. Also both QuickPay and Euroline doesn't feel that modern when it comes to setting up and managing your account. It should be as easy as signing up for one web service, setup how you want the money transfered to you and start integrating with the service API. I would be so happy to pay for that service.
+The solution with Chargify, QuickPay and Euroline should work good but there are a bit of paper work and research needed to get it up and running. Also both QuickPay and Euroline doesn't feel that modern when it comes to setting up and managing your account. 
+
+It should be as easy as signing up for one web service, setup how you want the money transferred to you and start integrating with the service API. I would be so happy to pay for that service.
