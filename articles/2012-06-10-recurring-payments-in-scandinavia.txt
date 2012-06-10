@@ -5,7 +5,7 @@ At [Oktavilla](http://oktavilla.se) we are working on a product called [Portfoli
 
 There are a few cool services out there for doing this but they usually requires a US merchant account or that you are based in the US. We are doing this a Swedish company and don't have a US merchant account so the options have been limited when it comes to adding this without building the whole payment and plan handling system from scratch. I have seen quite a few posts on sites like [HackerNews](http://news.ycombinator.com/) asking how to do recurring billing if you are not US based and it looks like there are little information on how to do this. 
 
-After a quite a lot of research we ended up using three different services to solve this:
+After some research we ended up using three different services to solve this:
 
 * [Chargify](http://chargify.com/) for billing and plan management 
 * [QuickPay](http://quickpay.net) as payment service provider
