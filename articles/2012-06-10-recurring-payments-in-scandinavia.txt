@@ -15,7 +15,7 @@ With these three services setup it is pretty easy to do recurring payments, you 
 
 ## A few pointers 
 
-To make the process as fast as possible I would suggest that you start out with adding the billing screens and Chargify integration to your application (test out the API using Chargify's [Test Gateway](http://docs.chargify.com/gateway-configuration)). The reason to start with this is that Euroline wants to screen your web site before accepting you as a customer to ensure that the appropiate information on billing are available to your new customers. Euroline will provide you with a list of information that has to be on the web site when you contact them the first time. 
+To make the process as fast as possible I would suggest that you start out with adding the billing screens and Chargify integration to your application (test out the API using Chargify's [Test Gateway](http://docs.chargify.com/gateway-configuration)). The reason to start with this is that Euroline wants to screen your web site before accepting you as a customer to ensure that the appropiate information on billing is available to your new customers. Euroline will provide you with a list of information that has to be on the web site when you contact them the first time. 
 
 When applying for your Euroline account make sure that you enter all the different currencies that you want to accept. Also make sure that you get both a customer number and TOF number after they have accepted you as a customer. It tooks us some extra weeks to get the right TOF number and to work out why we were getting an error. The error message just said ”120” and it turned out that is was raised because our account was not setup to properly handle Euro. 
 
