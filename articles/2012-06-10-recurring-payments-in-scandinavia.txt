@@ -17,11 +17,11 @@ With these three services setup it is pretty easy to do recurring payments, you 
 
 To make the process as fast as possible I would suggest that you start out with adding the billing screens and Chargify integration to your application (test out the API using Chargify's [Test Gateway](http://docs.chargify.com/gateway-configuration)). The reason to start with this is that Euroline wants to screen your web site before accepting you as a customer to ensure that the appropiate information on billing is available to your new customers. Euroline will provide you with a list of information that has to be on the web site when you contact them the first time. 
 
-When applying for your Euroline account make sure that you enter all the different currencies that you want to accept. Also make sure that you get both a customer number and TOF number after they have accepted you as a customer. It tooks us some extra weeks to get the right TOF number and to work out why we were getting an error. The error message just said ”120” and it turned out that is was raised because our account was not setup to properly handle Euro. 
+When applying for your Euroline account make sure that you enter all the different currencies that you want to accept. Also make sure that you get both a customer number and TOF number after they have accepted you as a customer. It tooks us about a week to get the right TOF number and to work out why we were getting an error. The error message just said ”120” and it turned out that is was raised because our account was not setup to  handle Euro. 
 
-I got a big confused by the QuickPay interface at first. To set up Euroline in QuickPay manager: under the Settings category in the navigation open the Acquirers screen and add your TOF number and enable subscription payments below “Nets/Teller” also add your Euroline customer number as the Euroline merchant ID below “Euroline”. 
+I got a bit confused by the QuickPay interface at first. To set up Euroline in QuickPay manager: under the Settings category in the navigation open the Acquirers screen and add your TOF number and enable subscription payments below “Nets/Teller” also add your Euroline customer number as the Euroline merchant ID below “Euroline”. 
 
-You can check that the QuickPay integration is working if you open up the Tools category in QuickPay manager navigation and click the Testsuite item, then run the Test subscription test to verify. When the test passes just enable QuickPay in Chargify and your are ready to start accepting recurring payments.
+You can check that the QuickPay integration is working if you open up the Tools category in QuickPay manager navigation and click the Testsuite item, then run the “Test subscription“ test to verify. When the test passes just enable QuickPay in Chargify and your are ready to start accepting recurring payments.
 
 ## The future
 
