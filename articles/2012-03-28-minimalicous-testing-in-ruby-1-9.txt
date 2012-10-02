@@ -1,4 +1,4 @@
-title: Minimalicious testing in Ruby 1.9
+title: Minimalicious testing in Ruby 1.9 with MiniTest
 
 ~
 
