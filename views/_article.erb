@@ -12,19 +12,20 @@
       <%= article.body.formatted %>
       <div id="share">
         <div class="service">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= article.title %> - " data-via="arvid_a" data-related="arvid_a">Tweet</a>
-      </div>
-      <div class="service">
-        <g:plusone size="medium" annotation="none"></g:plusone>
-      </div>
-        <div class="service" id="reddit">
-        <script type="text/javascript">
-          reddit_url = "http://blog.arvidandersson.se<%= article.url %>";
-          reddit_css ="margin-top: 4px;"
-        </script>
-        <script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= article.title %> - " data-via="arvid_a" data-related="arvid_a">Tweet</a>
         </div>
-      </div>
+        <div class="service">
+          <g:plusone size="medium" annotation="none"></g:plusone>
+        </div>
+        <div class="service" id="reddit">
+          <script type="text/javascript">
+            reddit_url = "http://blog.arvidandersson.se<%= article.url %>";
+            reddit_css ="margin-top: 4px;"
+            </script>
+            <script type="text/javascript" src="http://www.reddit.com/static/button/button1.js"></script>
+          </div>
+          <a href="http://coderwall.com/arvida"><img alt="Endorse arvida on Coderwall" src="http://api.coderwall.com/arvida/endorsecount.png" /></a>
+        </div>
       <% if article.instance_of?(Serious::Article) %>
         <%= render_partial :disqus if Serious.disqus %>
       <% end %>
