@@ -1,4 +1,4 @@
-title: "Using Flurry with a RubyMotion app"
+title: "Using Flurry analytics with a RubyMotion app"
 
 ~
 
