@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="/css/application.css">
     <link rel="stylesheet" type="text/css" href="/css/coderay.css">
     <link rel="alternate" type="application/atom+xml" title="Random notes by Arvid Andersson" href="<%= Serious.feed_url %>" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
     <title><%= @article ? @article.title + " - Random notes by Arvid Andersson" : Serious.title %></title>
     <% if @article %><meta name="title" content="<%= @article.title %>"><% end %>

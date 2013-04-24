@@ -1,26 +1,23 @@
 body {
   margin: 0 auto;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-size: 16px;
+  font-size: 1em;
   line-height: 1.5;
   color: #333;
-  padding: 10px 4px 0 4px;
-  width: 95%;
-  max-width: 720px; }
+  padding: 10px 10px 0 10px;
+}
 
-h1 { 
+h1 {
   margin-top: 0;
-  font-size: 28px;
-  line-height: 1.4em;}
-h2 { 
-  font-size: 22px; }
-h3 { font-size: 18px; }
-h4 { font-size: 16px; }
-p { font-size: 15px; }
+  font-size: 2em;
+  line-height: 1.250em;}
+h2 {
+  font-size: 1.375em; }
+h3 { font-size: 1.125em; }
 em { color: #4f4f4f; }
 
 ul, ol{
-  font-size: 14px;
+  font-size: 0.875em;
   padding-left: 18px; }
 
 a {
@@ -30,53 +27,60 @@ a {
 a:hover {
   border: none;
   color: #B2246B; }
-h1 a { 
-  border: none; 
+h1 a {
+  border: none;
   color: #333;}
 
 .date {
   color: #c3c3c3;
-  font-size: 14px;}
+  font-size: 0.875em;}
 
 #articles { padding-left: 0; }
   #articles h2 {font-weight:normal;}
   #articles li {
-  margin-bottom: .5em; 
+  margin-bottom: .5em;
   list-style: none; }
   #articles .date { margin-left: 8px; }
 
 #share {
   display:block;
   margin-top: 22px;
+  margin-bottom: 42px;
   height: 22px;
   width: 100%; }
 
-  .service { 
+  .service {
     float:left;
-    margin-right: 14px; }
+    margin-right: 0.875em; }
 
-#header { 
-  color: #ccc; 
+#header {
+  margin: auto;
+  color: #ccc;
+  max-width: 720px;
   margin-bottom: 2em; }
-  #header h1 { 
-    font-size: 20px;
+  #header h1 {
+    font-size: 1.250em;
     font-weight: normal;
     font-family: 'Shanti', sans-serif;
-    display: inline; 
+    display: inline;
     margin-right: 42px; }
   #header h1 a { border: none; }
   #header a { color: #333; }
-  #header span { 
-    float: right; 
-    font-size: 14px;
+  #header span {
+    float: right;
+    font-size: 0.875em;
     background: #FFE8F5;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     padding: 4px; }
     #header span a { margin: 0 6px; }
+#container {
+  margin: auto;
+  max-width: 720px;
+}
 #footer {
   color: #ccc;
   margin-top: 2em;
   text-align: right;
-  font-size: 12px; }
+  font-size: 0.75em; }
