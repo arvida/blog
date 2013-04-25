@@ -16,9 +16,7 @@ h2 {
 h3 { font-size: 1.125em; }
 em { color: #4f4f4f; }
 
-ul, ol{
-  font-size: 0.875em;
-  padding-left: 18px; }
+ul, ol{ padding-left: 18px; }
 
 a {
   text-decoration: none;
