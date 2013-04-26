@@ -29,6 +29,29 @@ h1 a {
   border: none;
   color: #333;}
 
+code {
+  font-size: 13px;
+  background-color: #fcfcfc;
+  border: 1px solid #eaeaea;
+  font-family: Menlo, Inconsolata, Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+  padding: 1px 3px;
+  margin: 0 2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #000;
+}
+
+a code {
+  border: 1px solid #eaeaea;
+  text-decoration: underline;
+  color: #E34292;
+}
+
+a:hover code {
+  color: #B2246B; }
+
+
 .date {
   color: #c3c3c3;
   font-size: 0.875em;}

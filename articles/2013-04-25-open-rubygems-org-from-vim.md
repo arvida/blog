@@ -2,7 +2,7 @@ title: Open up rubygems.org from Vim
 
 ~
 
-One thing I find my self doing a couple of times every week is browsing a `Gemfile` for a project and wanting to checkout the [rubygems.org](http://rubygems.org) page for a gem. Sometimes I want to see what versions are available, the docs or checkout the project on GitHub.
+One thing I find my self doing a couple of times every week is browsing a Gemfile for a project and wanting to checkout the [rubygems.org](http://rubygems.org) page for a gem. Sometimes I want to see what versions are available, the docs or checkout the project on GitHub.
 
 A couple of months back I decided to write a little Vim plugin to save myself a couple of key strokes the next time I want to open up a gems page. 
 
