@@ -19,13 +19,12 @@ em { color: #4f4f4f; }
 ul, ol{ padding-left: 18px; }
 
 a {
-  text-decoration: none;
-  border-bottom: 1px dotted #bbb;
-  color: #E34292; }
+  color: #cd0468; }
 a:hover {
   border: none;
-  color: #B2246B; }
+  color: #6b0035; }
 h1 a {
+  text-decoration: none;
   border: none;
   color: #333;}
 
@@ -53,15 +52,21 @@ a:hover code {
 
 
 .date {
-  color: #c3c3c3;
-  font-size: 0.875em;}
+  text-transform: uppercase;
+  color: #ccc;
+  font-size: 0.75em; }
 
 #articles { padding-left: 0; }
   #articles h2 {font-weight:normal;}
   #articles li {
-  margin-bottom: .5em;
-  list-style: none; }
-  #articles .date { margin-left: 8px; }
+    padding: 7px 0;
+    border-bottom: 1px solid #eee;
+    list-style: none; }
+  #articles .date {
+    float: right;
+    margin-left: 8px;
+    padding-top: 4px;
+  }
 
 #share {
   display:block;
@@ -105,3 +110,20 @@ a:hover code {
   margin-top: 2em;
   text-align: right;
   font-size: 0.75em; }
+
+@media only screen and (max-width: 640px) {
+  #header { margin-bottom: 1em; }
+  #header h1 { font-size: 1em; }
+  #header span {
+    margin-top: 1em;
+    display: block;
+    float: none;
+    text-align: center;
+  }
+  #header span a { margin: 0 1em 0 0; }
+  #articles .date {
+    display: block;
+    float: none;
+    margin: 0;
+  }
+}
