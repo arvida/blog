@@ -48,7 +48,7 @@ Then delete it:
 
 To move arround within a screen session you have invoke scroll mode:
 
-	CTRL -a ESC
+	CTRL - a ESC
 	
 In scroll mode you can use HJKL, the arrow keys or page up / down keys to move around. You can also type `/` to search forward and `?` to search backwards. This mode shares quite a few commands with vim. For example you can do `gg` and `GG` to move to begining / end of file and `w` and `b` to move to next / previous word.
 
