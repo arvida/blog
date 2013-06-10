@@ -68,6 +68,13 @@ a:hover code {
     padding-top: 4px;
   }
 
+.article h1 a {
+  line-height: 1em;
+}
+.article h1 a:hover {
+  color: #333;
+}
+
 #share {
   display:block;
   margin-top: 22px;
