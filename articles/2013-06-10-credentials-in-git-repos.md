@@ -42,3 +42,5 @@ GitHub's guide to removing accidentally commited sensitive data from a repositor
 
 How GitHub was hacked last year  
 [https://gist.github.com/peternixey/1978249](https://gist.github.com/peternixey/1978249)
+
+_Super thanks to [Alexis Fellenius](http://lexi.se) for proofreading this blog post._
