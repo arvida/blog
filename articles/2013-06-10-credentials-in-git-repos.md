@@ -2,21 +2,21 @@ title: Sensitive data in git repositories
 
 ~
 
-The other day I got into a discussion about storing AWS credentials in a project's
+The other day I got into a discussion about storing AWS credentials in a project’s
 git repository. The credentials were used for deploying a static site to S3 and
 the argument was that _”it makes it much easier to get started if the credentials
 already exists in the project when cloned, and as the repo is a private GitHub repository we
-don't have to worry about any unauthorised access”_.
+don’t have to worry about any unauthorised access”_.
 
-Years of being forced to handle Ruby On Rails's database.yml and similar files
+Years of being forced to handle Ruby On Rails’s database.yml and similar files
 has made into a habit for me to always keep a projects credentials and sensitive data in
 separate files that are ignored by git. Approached with the above reasoning
 made me realise that I might live in a bit of a bubble when it comes to this. Coming
-from another background and you might very well have a another view on how to
+from another background you might very well have a another view on how to
 handle credentials in projects.
 
 I instinctively felt that the above approach was not ideal. Phrasing a sound
-explanation to why this is a bad idea took some time; the rest if this post is
+explanation to why this is a bad idea took some time; the rest of this post is
 the arguments I came up with.
 
 ## Why is this important?
@@ -27,7 +27,7 @@ minimizing the places where sensitive data exists. Every time you put the
 sensitive data somewhere you increase the chances of unauthorized access.
 
 Once you have put sensitive data in a git repo it is going to stay in the
-repository's history forever ([there are ways around this](https://help.github.com/articles/remove-sensitive-data)). You never know where a project folder might end up
+repository’s history forever ([there are ways around this](https://help.github.com/articles/remove-sensitive-data)). You never know where a project folder might end up
 in the future. Stay safe and make it easy for yourself by handling things like this right from the start of a projects life.
 
 [GitHub](https://github.com/) is a truly awesome service and I have much respect for it and the people
@@ -36,7 +36,7 @@ that is hosted on GitHub and similar services. The reason for this is that websi
 compromised](https://github.com/blog/1068-public-key-security-vulnerability-and-mitigation) in the past. It is better to minimize the impact if this happens in the future.
 
 Another reason to keep sensitive data out of private repositories on services is external applications that have access to your repositories via
-for example [GitHub's OAuth2 authentication](http://developer.github.com/v3/oauth/#scopes). Some [of](http://airbrake.io) [the](http://tddium.com/) [apps](http://prose.io/) using GitHub's API request
+for example [GitHub's OAuth2 authentication](http://developer.github.com/v3/oauth/#scopes). Some [of](http://airbrake.io) [the](http://tddium.com/) [apps](http://prose.io/) using GitHub’s API request
 permission to access your private repos. These are great services that have good intentions but
 once they have access to your private repositories they also introduce another way to get access your sensitive data if it is available in your git repository. Remember, these services can also get hacked.
 
@@ -48,7 +48,7 @@ app method](http://www.12factor.net/) describes a great policy regarding this in
 ## Handle sensitive data in a project
 
 The main idea is to keep files with sensitive data separate from files with
-your application code. The files containing credentials should been added to
+your application code. The files containing credentials should be added to
 .gitignore to ensure that they are never accidentally committed. The
 application code then includes these files as they are needed.
 
