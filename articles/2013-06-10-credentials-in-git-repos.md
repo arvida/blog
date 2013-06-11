@@ -30,16 +30,15 @@ Another approach is to store your credentials in environment variables and use s
 
 ## More resources
 
-Figaro is alternative to dotenv mentioned above<br>
+Figaro is alternative to dotenv mentioned above  
 [https://github.com/laserlemon/figaro](https://github.com/laserlemon/figaro)
 
-Econfig is a ruby gem for configuring Rails applications<br>
+Econfig is a ruby gem for configuring Rails applications  
 [https://github.com/elabs/econfig](https://github.com/elabs/econfig)
 
 <div id="#gh-remove-sensitive-data"></div>
-GitHub's guide to removing accidentally commited sensitive data from a
-repository
+GitHub's guide to removing accidentally commited sensitive data from a repository  
 [https://help.github.com/articles/remove-sensitive-data](https://help.github.com/articles/remove-sensitive-data)
 
-How GitHub was hacked last year<br>
+How GitHub was hacked last year  
 [https://gist.github.com/peternixey/1978249](https://gist.github.com/peternixey/1978249)
