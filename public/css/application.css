@@ -112,6 +112,15 @@ a:hover code {
   margin: auto;
   max-width: 720px;
 }
+
+.notice {
+  padding: 10px 14px;
+  border: 1px solid rgb(255, 232, 245);
+  border-radius: 3px;
+  color: rgb(96, 32, 68);
+  background-color: rgba(255, 232, 245, .4);
+}
+
 #footer {
   color: #ccc;
   margin-top: 2em;
