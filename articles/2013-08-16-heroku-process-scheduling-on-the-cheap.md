@@ -95,5 +95,3 @@ ruby scaler.rb -a my-app -t web -d 3
 ## A little advice
 
 If you are planning on doing this on a production app make sure you got some error tracking to get alerted if the scheduled tasks has failed to run. It is mentioned in [the docs](https://devcenter.heroku.com/articles/scheduler) that “Scheduler is known to occasionally (but rarely) miss the execution of scheduled jobs”. For example I added [e-mail alerts and logging to StatHat](https://github.com/arvida/thief-in-the-night). 
-
-<br><p class="notice">Looking for free stuff on Heroku? To make it easy finding all the freebies on Heroku I created a page listing all the add-ons with free plans. <strong>Checkout it at <a href="http://www.free-heroku-addons.com/">free-heroku-addons.com</a>.</strong></p><br>
