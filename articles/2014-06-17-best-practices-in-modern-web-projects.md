@@ -139,7 +139,7 @@ And, remember that Amazon S3 is not CDN. It is a service for storing files and i
 
 ## Closing thoughts
 
-All projects are different and of course these practices are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within the company makes things work a bit smoother. It reduces setup time and makes it easy for new project members to get started contributing. Just make sure that the documentation of these practices are alive and evolves over time.
+All projects are different and of course these practices are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within a organisation makes things work a bit smoother. It reduces setup time and makes it easy for new project members to get started contributing. Just make sure that the documentation of these practices are alive and evolves over time.
 
 
 
