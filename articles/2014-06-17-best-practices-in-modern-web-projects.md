@@ -62,11 +62,11 @@ If there is any extra information that might be useful for someone looking at th
 
 Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that support pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
 
-Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone more than the author takes a look at the changes and says “thumbs up” before the code is merge into the master. 
+Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else than the author takes a look at the changes and says “thumbs up” before the code is merged into the master. 
 
-Be open to discussion, but don't let the review process hold back a merge to long. It is all team members responsibility to be keep the process quick and smooth within reasonable limits.
+Be open to discussion, but don't let the review process hold back a merge to long. It is every team member's responsibility to be keep the process quick and smooth within reasonable limits.
 
-It is also a good idea to keep an extra friendly tone in the discussions to avoid misunderstands and grief. Use [emojis](http://www.emoji-cheat-sheet.com/) to keep the discussion fun and productive.
+It is also a good idea to keep an extra friendly tone in the discussions to avoid misunderstandings and grief. Use [emojis](http://www.emoji-cheat-sheet.com/) to keep the discussion fun and productive.
 
 * [Understanding the GitHub Flow](https://guides.github.com/introduction/flow/index.html)
 * [How GitHub Uses GitHub to Build GitHub](https://www.youtube.com/watch?v=qyz3jkOBbQY)
@@ -77,7 +77,7 @@ It is also a good idea to keep an extra friendly tone in the discussions to avoi
 
 Most applications have some kind of configuration. It can be a connection URL for a database, API credentials for external services or something else.
 
-Unix like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables. 
+Unix-like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables. 
 
 Using environment variables allows for a separation of configuration from the code base. This makes it easy to change configuration values for a deployed application without updating any code. 
 
@@ -90,7 +90,7 @@ A good goal is that the application can be open sourced at any time without comp
 
 All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has [bundler](http://bundler.io/) and node.js has [npm](https://www.npmjs.org/). Use a package manger and be sure to include the file that specifies package versions in the project.
 
-Once in a while go trough the dependencies list and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`. 
+Go through the dependencies list once in a while and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`. 
 
 A majority of “good” packages use [semantic versioning](http://semver.org/). With this you can tell from the version number if a version is backwards compatible, add new features or just fixes bugs. Using this you can know what to expect from new versions of a package.
 
@@ -101,16 +101,16 @@ A majority of “good” packages use [semantic versioning](http://semver.org/).
 
 The deploy procedure should be automated so it requires a minimum of human interaction. With the information from the README and correct credentials it should be a matter of running a command in the shell or pressing a button to put a new version of the application online. 
 
-Automation is important to avoid human errors. If there are any manual tasks involved with making a deploy, sooner or later someone will forget to do these or not get them done correctly. There can be bugs in deploy scripts but once they are discovered and fixed they will not happen again.
+Automation is important to avoid human errors. If there are any manual tasks involved with making a deploy, sooner or later someone will forget to do them or do them incorrectly. There can be bugs in deploy scripts but once they are discovered and fixed they will not happen again.
 
 * [Why Continuous Deployment?](http://www.startuplessonslearned.com/2009/06/why-continuous-deployment.html)
 * [Continuous delivery](http://en.wikipedia.org/wiki/Continuous_delivery)
 
 ## Application environments
 
-A application should be capable of behaving differently depending of what environment it is run in. 
+An application should be capable of behaving differently depending of what environment it is running in. 
 
-Examples of different behaviours that depends on the current environment might be how much detail is displayed on error pages, what goes in to log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
+Examples of different behaviours that depends on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
 
 The default environments are `development`, `test`, `staging` and `production`. Development is the default mode that the application run in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application run in when deployed. The production environment is where the actual end users use the application and staging is a replica of production that is used to test changes before they are pushed to production.
 
@@ -121,17 +121,17 @@ The application picks up what environment to run in from a environment variable.
 
 ## Static files through a CDN
 
-Static files like images, fonts, CSS and javascript for a production applications should not be served from the same server as the application to end users. Serve these through a CDN that is optimised for serving static files to ensure high transfer speeds and therefore increased user happiness.
+Static files like images, fonts, CSS and javascript for production applications should not be served from the same server as the application to end users. Serve these through a CDN that is optimised for serving static files to ensure high transfer speeds and therefore increased user happiness.
 
 A common way to solve this is using a CDN with a custom origin set up and cache busting by file name. With this the application will add the CDN-host and a hash of the files contents to all files that should be served through the CDN when run in the production environment. 
 
-For example a stylesheet link tag will look like this in the development environment:
+For example, a stylesheet link tag will look like this in the development environment:
  
 <% highlight :html do %>
 <link href="/style.css" rel="stylesheet" type="text/css">
 <% end %>
 
-.. and like this in production: 
+And like this in production: 
 
 <% highlight :html do %>
 <link href="http://my-cdn.com/style-a06ae46033959f7563b20c5faff6f5e60175253f.css" rel="stylesheet" type="text/css">
@@ -139,15 +139,17 @@ For example a stylesheet link tag will look like this in the development environ
 
 When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
 
-And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised delivery. Therefore don't use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering. 
+And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised for delivery. Therefore don't use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering. 
 
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
 
 ## Closing thoughts
 
-All projects are different and of course the practices mentioned in this post are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within a organisation makes things work smoother. It reduces setup time and makes it easy for new project members to get started contributing. Just make sure that the documentation for your practices are alive and evolves over time.
+All projects are different and of course the practices mentioned in this post are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within an organisation makes things work smoother. It reduces setup time and makes it easy for new project members to start contributing. Just make sure that the documentation for your practices is alive and evolves over time.
 
 
 
 <p class="notice"><strong>Care about things like this?</strong> We are currently looking for Javascript and Ruby developers with a keen eye for details to join our team at <a href="http://oktavilla.se">Oktavilla</a>. <a href="mailto:arvid.andersson@oktavilla.se">Get in touch if you want to know more.</a></p>
+
+_Many thanks to my colleague [Gustaf Forsslund](https://twitter.com/snurra) for a thorough proofreading of this blog post._
