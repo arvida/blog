@@ -2,21 +2,23 @@ title: Best practices in modern web projects
 
 ~
 
-At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the years this has made us to come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in all our projects, both internal and for clients. In the end we deliver high quality  web projects and this is one part of that process.  
+At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the years this has made us to come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in the majority of our projects, both internal and for clients. In the end we deliver high quality  web projects and this is one part of that process.  
 
-In this blog post I focus on practices related to the technical side of things. Like setup and what think about when choosing tools and processes. Each practice has a link or two in the end to resources with more information. 
+In this blog post I focus on a few practices related to the technical side of things. Like setup and what think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information. 
+
+Let's start out with the most important file in a project.
 
 ## The README file
 
 A project must have a README file in it's root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file. 
 
-When writing the README think of the reader as a novice with basic knowledge of programming environments. Format your text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for the reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
+When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for a reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
 
 A README should include at least the following sections:
 
 ### Introduction
 
-A brief introduction that explains what the purpose of this project is. Also include the projects role if it is a part of larger project architecture, who the client might be and any other information that might be good to know.
+A brief introduction that explains what the purpose of this project is. Also include the projects role if it is a part of larger architecture, who the client might be and any other information that might be good to know.
 
 ### Dependencies
 
@@ -26,7 +28,7 @@ Include a list of on dependencies that needs to be installed separately. For exa
 
 Someone who is new to the project should easily understand how get it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the projects code. This can be notes on how to install needed packages, start the application and run the tests. 
 
-Use concrete example like what to type into the shell to invoke the different steps.
+Use concrete example like what to type into the shell to invoke the different tasks.
 
 ### Configuration
 
@@ -48,7 +50,7 @@ First of all, use git for version control. It is modern, works great and the maj
 
 ### Deployable master branch
 
-Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Always keeping your current work in a separate branch to allow fast switching to the master for the bug fix and the courage to deploy without the risk of putting any new or unknown code in front of your application users.
+Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allows for fast switching to the master branch for the bug fix and the courage to deploy without the risk of putting any new or unknown code in front of your application users.
 
 ### Commit messages
 
@@ -75,7 +77,7 @@ It is also a good idea to keep an extra friendly tone in the discussions to avoi
 
 Most applications have some kind of configuration. It can be a connection URL for a database, API credentials for external services or something else.
 
-Unix like operation systems have great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables. 
+Unix like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables. 
 
 Using environment variables allows for a separation of configuration from the code base. This makes it easy to change configuration values for a deployed application without updating any code. 
 
@@ -93,6 +95,7 @@ Once in a while go trough the dependencies list and check what packages have bee
 A majority of “good” packages use [semantic versioning](http://semver.org/). With this you can tell from the version number if a version is backwards compatible, add new features or just fixes bugs. Using this you can know what to expect from new versions of a package.
 
 * [Package.json dependencies done right](http://blog.nodejitsu.com/package-dependencies-done-right)
+* [Semantic Versioning](http://semver.org/)
 
 ## Deploy
 
@@ -109,7 +112,7 @@ A application should be capable of behaving differently depending of what enviro
 
 Examples of different behaviours that depends on the current environment might be how much detail is displayed on error pages, what goes in to log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
 
-The default environments are `development`, `test`, `staging` and `production`. Development is the default mode that the application run in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application run in when deployed.
+The default environments are `development`, `test`, `staging` and `production`. Development is the default mode that the application run in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application run in when deployed. The production environment is where the actual end users use the application and staging is a replica of production that is used to test changes before they are pushed to production.
 
 The application picks up what environment to run in from a environment variable. These are usually called something like `NODE_ENV` or `RAILS_ENV`.
 
@@ -134,7 +137,7 @@ For example a stylesheet link tag will look like this in the development environ
 <link href="http://my-cdn.com/style-a06ae46033959f7563b20c5faff6f5e60175253f.css" rel="stylesheet" type="text/css">
 <% end %>
 
-When the CDN gets a request for a file it is missing it will request and cache that file from the application's production server. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
+When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
 
 And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised delivery. Therefore don't use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering. 
 
@@ -147,4 +150,4 @@ All projects are different and of course the practices mentioned in this post ar
 
 
 
-<p class="notice"><strong>Care about things like this?</strong> We are currently looking for application developers with a keen eye for details to join our team at <a href="http://oktavilla.se">Oktavilla</a>. <a href="mailto:arvid.andersson@oktavilla.se">Get in touch if you want to know more.</a></p>
+<p class="notice"><strong>Care about things like this?</strong> We are currently looking for Javascript and Ruby developers with a keen eye for details to join our team at <a href="http://oktavilla.se">Oktavilla</a>. <a href="mailto:arvid.andersson@oktavilla.se">Get in touch if you want to know more.</a></p>
