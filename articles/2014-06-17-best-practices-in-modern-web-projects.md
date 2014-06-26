@@ -2,15 +2,15 @@ title: Best practices in modern web projects
 
 ~
 
-At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the years this has made us to come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in the majority of our projects, both internal and for clients. In the end we deliver high quality  web projects and this is one part of that process.  
+At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the years we have therefore come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in the majority of our projects, both internally and for clients. In the end we deliver high quality  web projects and this is one part of that process.  
 
-In this blog post I focus on a few practices related to the technical side of things. Like setup and what think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information. 
+In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information. 
 
 Let's start out with the most important file in a project.
 
 ## The README file
 
-A project must have a README file in it's root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file. 
+A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file. 
 
 When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for a reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
 
@@ -22,13 +22,13 @@ A brief introduction that explains what the purpose of this project is. Also inc
 
 ### Dependencies
 
-Include a list of on dependencies that needs to be installed separately. For example: database servers, package managers and programming languages. Be sure to include what versions that are required as well.
+Include a list of dependencies that needs to be installed separately. For example: database servers, package managers and programming languages. Be sure to include what versions are required as well.
 
 ### Local development setup
 
-Someone who is new to the project should easily understand how get it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the projects code. This can be notes on how to install needed packages, start the application and run the tests. 
+Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the project's code. This can be notes on how to install needed packages, start the application and run the tests. 
 
-Use concrete example like what to type into the shell to invoke the different tasks.
+Use concrete examples like what to type into the shell to invoke the different tasks.
 
 ### Configuration
 
@@ -38,7 +38,7 @@ If the application can be configured using environment variables include a list 
 
 Part of working on a project is also being able to deploy your changes. Let the reader know how to deploy code to production and staging environments. 
 
-For example if you use [Heroku](http://heroku.com); include concrete example on how to set up the different git remotes used for deploy and how to push code to these.
+For example, if you use [Heroku](http://heroku.com), include concrete example on how to set up the different git remotes used for deploy and how to push code to these.
 
 * [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
 * [How To Write A Great README](http://robots.thoughtbot.com/how-to-write-a-great-readme)
@@ -46,23 +46,23 @@ For example if you use [Heroku](http://heroku.com); include concrete example on 
 
 ## Git
 
-First of all, use git for version control. It is modern, works great and the majority of developers are either comfortable using it or want to start using it. 
+First of all, use git for version control. It is modern, works great and the majority of developers are either comfortable in using it or want to start using it. 
 
 ### Deployable master branch
 
-Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allows for fast switching to the master branch for the bug fix and the courage to deploy without the risk of putting any new or unknown code in front of your application users.
+Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allows for fast switching to the master branch for the bug fix and it also give you the courage to deploy without the risk of putting any new or unknown code in front of your application users.
 
 ### Commit messages
 
-Strive to write informative commit messages. A good commit message should include a short title and body. The title explains what the purpose of the change is and the body gives more information on why this change was needed. Think of commit messages as documentation for your code.
+Strive to write informative commit messages. A good commit message should include a short title and body. The title explains what the purpose of the change was and the body gives more information on why this change was needed. Think of commit messages as documentation of your code.
 
-If there is any extra information that might be useful for someone looking at the commit include that in the body. For example, if there is a corresponding issue in your issue tracker be sure to include a reference to the related issue.
+If there is any extra information that might be useful for someone looking at the commit, include that in the body. For example, if there is a corresponding issue in your issue tracker be sure to include a reference to the related issue.
 
 ### Pull requests
 
 Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that support pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
 
-Use this for discussion and to spread knowledge about different parts the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone more than the author takes a look at the changes and says “thumbs up” before the code is merge into the master. 
+Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone more than the author takes a look at the changes and says “thumbs up” before the code is merge into the master. 
 
 Be open to discussion, but don't let the review process hold back a merge to long. It is all team members responsibility to be keep the process quick and smooth within reasonable limits.
 
