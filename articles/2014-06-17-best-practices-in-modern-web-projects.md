@@ -22,7 +22,7 @@ A brief introduction that explains what the purpose of this project is. Also inc
 
 ### Dependencies
 
-Include a list of dependencies that needs to be installed separately. For example: database servers, package managers and programming languages. Be sure to include what versions are required as well.
+Include a list of dependencies that need to be installed separately. For example: database servers, package managers and programming languages. Be sure to include what versions are required as well.
 
 ### Local development setup
 
@@ -60,9 +60,9 @@ If there is any extra information that might be useful for someone looking at th
 
 ### Pull requests
 
-Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that support pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
+Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
 
-Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else than the author takes a look at the changes and says “thumbs up” before the code is merged into the master. 
+Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master. 
 
 Be open to discussion, but don't let the review process hold back a merge to long. It is every team member's responsibility to be keep the process quick and smooth within reasonable limits.
 
@@ -88,7 +88,7 @@ A good goal is that the application can be open sourced at any time without comp
 
 ## Package managers
 
-All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has [bundler](http://bundler.io/) and node.js has [npm](https://www.npmjs.org/). Use a package manger and be sure to include the file that specifies package versions in the project.
+All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has [bundler](http://bundler.io/) and node.js has [npm](https://www.npmjs.org/). Use a package manager and be sure to include the file that specifies package versions in the project.
 
 Go through the dependencies list once in a while and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`. 
 
@@ -110,9 +110,9 @@ Automation is important to avoid human errors. If there are any manual tasks inv
 
 An application should be capable of behaving differently depending of what environment it is running in. 
 
-Examples of different behaviours that depends on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
+Examples of different behaviours that depend on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
 
-The default environments are `development`, `test`, `staging` and `production`. Development is the default mode that the application run in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application run in when deployed. The production environment is where the actual end users use the application and staging is a replica of production that is used to test changes before they are pushed to production.
+The default environments are `development`, `test`, `staging` and `production`. Development is the default mode that the application runs in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application runs in when deployed. The production environment is where the actual end users use the application and staging is a replica of production that is used to test changes before they are pushed to production.
 
 The application picks up what environment to run in from a environment variable. These are usually called something like `NODE_ENV` or `RAILS_ENV`.
 
