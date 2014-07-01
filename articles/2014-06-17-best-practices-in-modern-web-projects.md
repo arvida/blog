@@ -21,7 +21,7 @@ Let’s start out with the most important file in any project.
 
 A project must have a README file in its root directory. It contains information on all the why’s and how’s for the project. Any team member, new or old, should easily get a understanding of what the project is and how to work with it from reading this file.
 
-When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for the reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
+When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for the reader to digest. Markdown is both easily read as source code and can be rendered as HTML (GitHub does this automatically for example).
 
 A README should include at least the following sections:
 
@@ -47,7 +47,7 @@ If the application can be configured using environment variables include a list 
 
 Part of working on a project is also being able to deploy your changes. Let the reader know how to deploy code to production and staging environments.
 
-For example, if you use [Heroku](http://heroku.com), include examples on how to set up the different git remotes used for deployment and how to push code to these.
+For example, if you use [Heroku](http://heroku.com), include examples on how to set up the different Git remotes used for deployment and how to push code to these.
 
 * [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
 * [How To Write A Great README](http://robots.thoughtbot.com/how-to-write-a-great-readme)
@@ -69,7 +69,7 @@ If there is any extra information that might be useful for someone looking at th
 
 ### Pull Requests
 
-Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
+Use a web based Git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
 
 Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master.
 
