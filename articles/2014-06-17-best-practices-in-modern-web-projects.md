@@ -38,7 +38,7 @@ If the application can be configured using environment variables include a list 
 
 Part of working on a project is also being able to deploy your changes. Let the reader know how to deploy code to production and staging environments.
 
-For example, if you use [Heroku](http://heroku.com), include concrete example on how to set up the different git remotes used for deploy and how to push code to these.
+For example, if you use [Heroku](http://heroku.com), include examples on how to set up the different git remotes used for deployment and how to push code to these.
 
 * [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
 * [How To Write A Great README](http://robots.thoughtbot.com/how-to-write-a-great-readme)
