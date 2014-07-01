@@ -130,9 +130,9 @@ The application picks up what environment to run in from an environment variable
 
 ## Static Files Through a CDN
 
-Static files like images, fonts, CSS and javascript for production applications should not be served from the same server as the application to end users. Serve these through a CDN that is optimised for serving static files to ensure high transfer speeds and therefore increased user happiness.
+Static files like images, fonts, CSS and Javascripts should be served through a content delivery network, CDN. They are built and optimised for serving static files to users all over the globe fast. A faster experience makes for happier users.
 
-A common way to solve this is using a CDN with a custom origin set up and cache busting by file name. With this the application will add the CDN-host and a hash of the files contents to all files that should be served through the CDN when run in the production environment.
+Getting your files on the CDN should be part of your automated deployment procedure. A common way to solve this is by using a CDN with a custom origin set up and cache busting by file name. With this the application will add the CDN-host and a hash of the files contents to all files that should be served through the CDN when run in the production environment.
 
 For example, a stylesheet link tag will look like this in the development environment:
 
