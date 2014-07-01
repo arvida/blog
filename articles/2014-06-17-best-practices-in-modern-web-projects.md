@@ -57,9 +57,9 @@ For example, if you use [Heroku](http://heroku.com), include examples on how to 
 
 First of all, use version control. Second, use Git for version control. It is modern, works great and a majority of developers are either comfortable using it or want to start using it.
 
-### Deployable master branch
+### Deployable at All Times
 
-Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allows for fast switching to the master branch for the bug fix and it also give you the courage to deploy without the risk of putting any new or unknown code in front of your application users.
+Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allow you to quickly switch to the master branch and fix the bug. It also gives you the peace of mind to deploy without worrying about accidentally pushing any new and untested code to your users.
 
 ### Commit messages
 
