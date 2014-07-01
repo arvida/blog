@@ -8,7 +8,7 @@ This is a summary of the best practises we use for modern web development projec
 
 * [The README file](#the-readme-file)
 * [Version Control and Git](#version-control-and-git)
-* [Configuration](#configuration)
+* [Configuration](#configuration-1)
 * [Package Managers](#package-managers)
 * [Deploy](#deploy-1)
 * [Application Environments](#application-environments)
