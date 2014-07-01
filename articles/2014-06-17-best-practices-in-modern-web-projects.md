@@ -86,7 +86,7 @@ It is also a good idea to keep an extra friendly tone to avoid misunderstandings
 
 Most applications have some kind of configuration. It can be a connection URL for a database, API credentials for external services or something else.
 
-Unix-like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables.
+Unix-like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use them to store all the applications configurations.
 
 Using environment variables allows for a separation of configuration from the code base. This makes it easy to change configuration values for a deployed application without updating any code.
 
