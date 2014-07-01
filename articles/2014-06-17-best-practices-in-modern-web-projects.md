@@ -92,7 +92,7 @@ All projects have some kind of external dependencies on libraries and most progr
 
 Go through the dependencies list once in a while and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`.
 
-A majority of “good” packages use [semantic versioning](http://semver.org/). With this you can tell from the version number if a version is backwards compatible, add new features or just fixes bugs. Using this you can know what to expect from new versions of a package.
+A majority of “good” packages use [semantic versioning](http://semver.org/) which helps you understand what to expect from a new version of a package. It tells you if a version is backwards compatible, adds new features or just fixes bugs.
 
 * [Package.json dependencies done right](http://blog.nodejitsu.com/package-dependencies-done-right)
 * [Semantic Versioning](http://semver.org/)
