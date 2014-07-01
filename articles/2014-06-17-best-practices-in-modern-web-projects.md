@@ -2,7 +2,7 @@ title: Best practices in modern web projects
 
 ~
 
-At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the years we have therefore come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in the majority of our projects, both internally and for clients. In the end we deliver high quality  web projects and this is one part of that process.  
+Building stuff for the web is quite complex. Therefor it is crucial to use an agreed upon methodology, documentation, best practices and using the right tools for the job. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have evolved our methodology.
 
 In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information. 
 
