@@ -33,7 +33,7 @@ A brief explanation of the projects purpose. If it is part of a larger architect
 
 Include a list of dependencies that need to be installed separately. For example: database servers, package managers and programming languages. Be sure to include what versions are required as well.
 
-### Local development setup
+### Local Development Setup
 
 Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a fresh copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests.
 
@@ -61,13 +61,13 @@ First of all, use version control. Second, use Git for version control. It is mo
 
 Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allow you to quickly switch to the master branch and fix the bug. It also gives you the peace of mind to deploy without worrying about accidentally pushing any new and untested code to your users.
 
-### Commit messages
+### Commit Messages
 
 Strive to write informative commit messages. A good commit message should include a short title and body. The title explains what the purpose of the change was and the body gives more information on why this change was needed. Think of commit messages as documentation of your code.
 
 If there is any extra information that might be useful for someone looking at the commit, include that in the body. For example, if there is a corresponding issue in your issue tracker be sure to include a reference to the related issue.
 
-### Pull requests
+### Pull Requests
 
 Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
 
@@ -95,7 +95,7 @@ A good goal is that the application can be open sourced at any time without comp
 * [The twelve-factor app](http://12factor.net/config)
 * [Heroku dev center: Configuration and Config Vars](https://devcenter.heroku.com/articles/config-vars)
 
-## Package managers
+## Package Managers
 
 All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has [bundler](http://bundler.io/) and node.js has [npm](https://www.npmjs.org/). Use a package manager and be sure to include the file that specifies package versions in the project.
 
@@ -115,7 +115,7 @@ Automation is important to avoid human errors. If there are any manual tasks inv
 * [Why Continuous Deployment?](http://www.startuplessonslearned.com/2009/06/why-continuous-deployment.html)
 * [Continuous delivery](http://en.wikipedia.org/wiki/Continuous_delivery)
 
-## Application environments
+## Application Environments
 
 An application should be capable of behaving differently depending of what environment it is running in.
 
@@ -128,7 +128,7 @@ The application picks up what environment to run in from a environment variable.
 * [Beyond the default Rails environments](http://signalvnoise.com/posts/3535-beyond-the-default-rails-environments)
 * [The Twelve-Factor App - Dev/prod parity](http://12factor.net/dev-prod-parity)
 
-## Static files through a CDN
+## Static Files Through a CDN
 
 Static files like images, fonts, CSS and javascript for production applications should not be served from the same server as the application to end users. Serve these through a CDN that is optimised for serving static files to ensure high transfer speeds and therefore increased user happiness.
 
@@ -153,7 +153,7 @@ And, remember that Amazon S3 is not CDN. It is a service for storing files and i
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
 
-## Closing thoughts
+## Closing Thoughts
 
 All projects are different and of course the practices mentioned in this post are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within an organisation makes things work smoother. It reduces setup time and makes it easy for new project members to start contributing. Just make sure that the documentation for your practices is alive and evolves over time.
 
