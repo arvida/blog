@@ -13,7 +13,6 @@ This is a summary of the best practises we use for modern web development projec
 * [Deploy](#deploy-1)
 * [Application Environments](#application-environments)
 * [Static files through a CDN](#static-files-through-a-cdn)
-* [Closing Thought](#closing-thoughts)
 
 ## The README file
 
