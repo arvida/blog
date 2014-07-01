@@ -12,7 +12,7 @@ Let’s start out with the most important file in any project.
 
 A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file.
 
-When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for a reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
+When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for the reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
 
 A README should include at least the following sections:
 
