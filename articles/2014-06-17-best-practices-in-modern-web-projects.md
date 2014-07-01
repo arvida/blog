@@ -46,7 +46,7 @@ For example, if you use [Heroku](http://heroku.com), include examples on how to 
 
 ## Git
 
-First of all, use git for version control. It is modern, works great and the majority of developers are either comfortable in using it or want to start using it.
+First of all, use git for version control. It is modern, works great and a majority of developers are either comfortable using it or want to start using it.
 
 ### Deployable master branch
 
