@@ -4,13 +4,13 @@ title: Best practices in modern web projects
 
 At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the years we have therefore come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in the majority of our projects, both internally and for clients. In the end we deliver high quality  web projects and this is one part of that process.  
 
-In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information. 
+In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information.
 
 Let’s start out with the most important file in a project.
 
 ## The README file
 
-A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file. 
+A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file.
 
 When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with [Markdown](http://daringfireball.net/projects/markdown/) to make it easy for a reader to digest. Markdown is both easily read as source code and can be rendered as HTML (Github does this automatically for example).
 
@@ -26,7 +26,7 @@ Include a list of dependencies that need to be installed separately. For example
 
 ### Local development setup
 
-Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests. 
+Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests.
 
 Use concrete examples like what to type into the shell to invoke the different tasks.
 
@@ -36,7 +36,7 @@ If the application can be configured using environment variables include a list 
 
 ### Deploy
 
-Part of working on a project is also being able to deploy your changes. Let the reader know how to deploy code to production and staging environments. 
+Part of working on a project is also being able to deploy your changes. Let the reader know how to deploy code to production and staging environments.
 
 For example, if you use [Heroku](http://heroku.com), include concrete example on how to set up the different git remotes used for deploy and how to push code to these.
 
@@ -46,7 +46,7 @@ For example, if you use [Heroku](http://heroku.com), include concrete example on
 
 ## Git
 
-First of all, use git for version control. It is modern, works great and the majority of developers are either comfortable in using it or want to start using it. 
+First of all, use git for version control. It is modern, works great and the majority of developers are either comfortable in using it or want to start using it.
 
 ### Deployable master branch
 
@@ -62,7 +62,7 @@ If there is any extra information that might be useful for someone looking at th
 
 Use a web based git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
 
-Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master. 
+Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master.
 
 Be open to discussion, but don’t let the review process hold back a merge to long. It is every team member’s responsibility to be keep the process quick and smooth within reasonable limits.
 
@@ -77,9 +77,9 @@ It is also a good idea to keep an extra friendly tone in the discussions to avoi
 
 Most applications have some kind of configuration. It can be a connection URL for a database, API credentials for external services or something else.
 
-Unix-like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables. 
+Unix-like operation systems have a great method for providing applications with configuration values at run time. It is called [environment variables](http://en.wikipedia.org/wiki/Environment_variable). Use this and store all application configuration as environment variables.
 
-Using environment variables allows for a separation of configuration from the code base. This makes it easy to change configuration values for a deployed application without updating any code. 
+Using environment variables allows for a separation of configuration from the code base. This makes it easy to change configuration values for a deployed application without updating any code.
 
 A good goal is that the application can be open sourced at any time without compromising any credentials.
 
@@ -90,7 +90,7 @@ A good goal is that the application can be open sourced at any time without comp
 
 All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has [bundler](http://bundler.io/) and node.js has [npm](https://www.npmjs.org/). Use a package manager and be sure to include the file that specifies package versions in the project.
 
-Go through the dependencies list once in a while and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`. 
+Go through the dependencies list once in a while and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`.
 
 A majority of “good” packages use [semantic versioning](http://semver.org/). With this you can tell from the version number if a version is backwards compatible, add new features or just fixes bugs. Using this you can know what to expect from new versions of a package.
 
@@ -99,7 +99,7 @@ A majority of “good” packages use [semantic versioning](http://semver.org/).
 
 ## Deploy
 
-The deploy procedure should be automated so it requires a minimum of human interaction. With the information from the README and correct credentials it should be a matter of running a command in the shell or pressing a button to put a new version of the application online. 
+The deploy procedure should be automated so it requires a minimum of human interaction. With the information from the README and correct credentials it should be a matter of running a command in the shell or pressing a button to put a new version of the application online.
 
 Automation is important to avoid human errors. If there are any manual tasks involved with making a deploy, sooner or later someone will forget to do them or do them incorrectly. There can be bugs in deploy scripts but once they are discovered and fixed they will not happen again.
 
@@ -108,7 +108,7 @@ Automation is important to avoid human errors. If there are any manual tasks inv
 
 ## Application environments
 
-An application should be capable of behaving differently depending of what environment it is running in. 
+An application should be capable of behaving differently depending of what environment it is running in.
 
 Examples of different behaviours that depend on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
 
@@ -123,15 +123,15 @@ The application picks up what environment to run in from a environment variable.
 
 Static files like images, fonts, CSS and javascript for production applications should not be served from the same server as the application to end users. Serve these through a CDN that is optimised for serving static files to ensure high transfer speeds and therefore increased user happiness.
 
-A common way to solve this is using a CDN with a custom origin set up and cache busting by file name. With this the application will add the CDN-host and a hash of the files contents to all files that should be served through the CDN when run in the production environment. 
+A common way to solve this is using a CDN with a custom origin set up and cache busting by file name. With this the application will add the CDN-host and a hash of the files contents to all files that should be served through the CDN when run in the production environment.
 
 For example, a stylesheet link tag will look like this in the development environment:
- 
+
 <% highlight :html do %>
 <link href="/style.css" rel="stylesheet" type="text/css">
 <% end %>
 
-And like this in production: 
+And like this in production:
 
 <% highlight :html do %>
 <link href="http://my-cdn.com/style-a06ae46033959f7563b20c5faff6f5e60175253f.css" rel="stylesheet" type="text/css">
@@ -139,7 +139,7 @@ And like this in production:
 
 When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
 
-And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised for delivery. Therefore don’t use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering. 
+And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised for delivery. Therefore don’t use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering.
 
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
