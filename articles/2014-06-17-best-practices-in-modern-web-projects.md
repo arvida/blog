@@ -35,7 +35,7 @@ Include a list of dependencies that need to be installed separately. For example
 
 ### Local development setup
 
-Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests.
+Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a fresh copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests.
 
 Use concrete examples like what to type into the shell to invoke the different tasks.
 
