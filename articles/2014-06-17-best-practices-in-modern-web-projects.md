@@ -6,9 +6,9 @@ At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the ye
 
 In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information.
 
-Let’s start out with the most important file in a project.
-
 ## The README file
+
+Let’s start out with the most important file in any project.
 
 A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file.
 
