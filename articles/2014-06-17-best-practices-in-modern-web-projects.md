@@ -4,7 +4,16 @@ title: Best practices in modern web projects
 
 Building stuff for the web is quite complex. Therefor it is crucial to use an agreed upon methodology, documentation, best practices and using the right tools for the job. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have learned a lot the hard way.
 
-In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information.
+This is a summary of the methodology and tools we use. I’ll focus on the technical side of things. Each part has a link or two in the end to resources with more information. These are the parts I’ll cover:
+
+* [The README file](#the-readme-file)
+* [Git](#git)
+* [Configuration](#configuration)
+* [Package Managers](#package-managers)
+* [Deploy](#deploy-1)
+* [Application Environments](#application-environments)
+* [Static files through a CDN](#static-files-through-a-cdn)
+* [Closing Thought](#closing-thoughts)
 
 Let’s start out with the most important file in a project.
 
