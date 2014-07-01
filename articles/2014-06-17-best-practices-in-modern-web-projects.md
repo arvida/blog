@@ -2,9 +2,9 @@ title: Best practices in modern web projects
 
 ~
 
-Building stuff for the web is quite complex. It is crucial to use common methodology, best practices, documentation and using the right tools to build, maintain and contribute to projects. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have learned a lot the hard way. Evolving these common practices, keeping them relevant and up-to-date makes things run a lot smoother.
+Building stuff for the web is quite complex. Using common best practices make it a bit easier. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have learned a lot the hard way. Applying these best practices and keeping them relevant and up-to-date has helped us make things run a lot smoother.
 
-This is a summary of the methodology and tools we use. I’ll focus on the technical side of things. Each part has a link or two in the end to resources with more information. These are the parts I’ll cover:
+This is a summary of the best practises we use for modern web development projects. Each part has a link or two in the end to resources with more information. These are the parts I’ll cover:
 
 * [The README file](#the-readme-file)
 * [Version Control and Git](#version-control-and-git)
