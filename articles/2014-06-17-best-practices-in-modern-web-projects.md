@@ -108,7 +108,7 @@ A majority of “good” packages use [semantic versioning](http://semver.org/) 
 
 ## Deploy
 
-The deploy procedure should be automated so it requires a minimum of human interaction. With the information from the README and correct credentials it should be a matter of running a command in the shell or pressing a button to put a new version of the application online.
+The deploy procedure should be automated so it requires minimum human interaction. With the information from the README and correct credentials it should be a matter of running a command in the shell or pressing a button to put a new version of the application online.
 
 Automation is important to avoid human errors. If there are any manual tasks involved with making a deploy, sooner or later someone will forget to do them or do them incorrectly. There can be bugs in deploy scripts but once they are discovered and fixed they will not happen again.
 
