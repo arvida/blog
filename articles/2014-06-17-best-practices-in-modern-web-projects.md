@@ -2,7 +2,7 @@ title: Best practices in modern web projects
 
 ~
 
-Building stuff for the web is quite complex. Therefor it is crucial to use an agreed upon methodology, documentation, best practices and using the right tools for the job. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have evolved our methodology.
+Building stuff for the web is quite complex. Therefor it is crucial to use an agreed upon methodology, documentation, best practices and using the right tools for the job. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have learned a lot the hard way.
 
 In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information.
 
