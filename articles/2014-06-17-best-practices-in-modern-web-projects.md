@@ -7,7 +7,7 @@ Building stuff for the web is quite complex. Therefor it is crucial to use an ag
 This is a summary of the methodology and tools we use. I’ll focus on the technical side of things. Each part has a link or two in the end to resources with more information. These are the parts I’ll cover:
 
 * [The README file](#the-readme-file)
-* [Git](#git)
+* [Version Control and Git](#version-control-and-git)
 * [Configuration](#configuration)
 * [Package Managers](#package-managers)
 * [Deploy](#deploy-1)
@@ -53,9 +53,9 @@ For example, if you use [Heroku](http://heroku.com), include examples on how to 
 * [How To Write A Great README](http://robots.thoughtbot.com/how-to-write-a-great-readme)
 * [The Most Important Code Isn’t Code](http://zachholman.com/posts/documentation/)
 
-## Git
+## Version Control and Git
 
-First of all, use git for version control. It is modern, works great and a majority of developers are either comfortable using it or want to start using it.
+First of all, use version control. Second, use Git for version control. It is modern, works great and a majority of developers are either comfortable using it or want to start using it.
 
 ### Deployable master branch
 
