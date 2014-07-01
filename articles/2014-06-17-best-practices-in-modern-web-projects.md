@@ -148,7 +148,7 @@ And like this in production:
 
 When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
 
-And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised for delivery. Therefore don’t use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering.
+And, remember that Amazon S3 is not a CDN and should not be used as such. This is a common mistake. It is a service for storing files and is not optimised for delivery. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering.
 
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
