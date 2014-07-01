@@ -90,7 +90,7 @@ A good goal is that the application can be open sourced at any time without comp
 
 All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has [bundler](http://bundler.io/) and node.js has [npm](https://www.npmjs.org/). Use a package manager and be sure to include the file that specifies package versions in the project.
 
-Go through the dependencies list once in a while and check what packages have been updated and if the updates might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`.
+Go through the list of dependencies once in a while and check which packages have been updated and if the update might be of interest. For example, you can do this easily with bundler using the command `bundle outdated` or with npm using `npm outdated`.
 
 A majority of “good” packages use [semantic versioning](http://semver.org/) which helps you understand what to expect from a new version of a package. It tells you if a version is backwards compatible, adds new features or just fixes bugs.
 
