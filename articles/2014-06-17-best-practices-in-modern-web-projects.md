@@ -15,9 +15,9 @@ This is a summary of the methodology and tools we use. I’ll focus on the techn
 * [Static files through a CDN](#static-files-through-a-cdn)
 * [Closing Thought](#closing-thoughts)
 
-Let’s start out with the most important file in a project.
-
 ## The README file
+
+Let’s start out with the most important file in any project.
 
 A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file.
 
