@@ -69,13 +69,13 @@ If there is any extra information that might be useful for someone looking at th
 
 ### Pull Requests
 
-Use a web based Git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.
+Use a web based Git hosting alternative like [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/) that supports pull requests for branches. This lets you tell other team members about code changes before they are merged into another branch.
 
-Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master.
+Use the pull request to discuss and spread knowledge about the different parts of the code base and changes to it by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged.
 
-Be open to discussion, but don’t let the review process hold back a merge to long. It is every team member’s responsibility to be keep the process quick and smooth within reasonable limits.
+Be open to discussion, but don’t let the review process hold back a merge too long. It is every team member’s responsibility to keep the process quick and smooth.
 
-It is also a good idea to keep an extra friendly tone in the discussions to avoid misunderstandings and grief. Use [emojis](http://www.emoji-cheat-sheet.com/) to keep the discussion fun and productive.
+It is also a good idea to keep an extra friendly tone to avoid misunderstandings and grief. Use [emojis](http://www.emoji-cheat-sheet.com/) extensively to keep the discussion fun and productive.
 
 * [Understanding the GitHub Flow](https://guides.github.com/introduction/flow/index.html)
 * [How GitHub Uses GitHub to Build GitHub](https://www.youtube.com/watch?v=qyz3jkOBbQY)
