@@ -54,7 +54,7 @@ Keep the master branch deployable at all times. Sooner or later you will get a b
 
 ### Commit Messages
 
-Strive to write informative commit messages. A good commit message should include a short title and body. The title explains what the purpose of the change was and the body gives more information on why this change was needed. Think of commit messages as documentation of your code.
+Write informative commit messages. A good commit message includes a short title and a body. The title explains the purpose of the change and the body gives more information on why this change was needed. Think of commit messages as the documentation of the  changes made to the code.
 
 If there is any extra information that might be useful for someone looking at the commit, include that in the body. For example, if there is a corresponding issue in your issue tracker be sure to include a reference to it.
 
