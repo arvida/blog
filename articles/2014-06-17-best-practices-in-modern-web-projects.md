@@ -2,7 +2,7 @@ title: Best practices in modern web projects
 
 ~
 
-Building stuff for the web is quite complex. Therefor it is crucial to use an agreed upon methodology, documentation, best practices and using the right tools for the job. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have learned a lot the hard way.
+Building stuff for the web is quite complex. It is crucial to use common methodology, best practices, documentation and using the right tools to build, maintain and contribute to projects. At [Oktavilla](http://oktavilla.se) we regularly start new projects and over the years we have learned a lot the hard way. Evolving these common practices, keeping them relevant and up-to-date makes things run a lot smoother.
 
 This is a summary of the methodology and tools we use. I’ll focus on the technical side of things. Each part has a link or two in the end to resources with more information. These are the parts I’ll cover:
 
@@ -152,12 +152,6 @@ And, remember that Amazon S3 is not a CDN and should not be used as such. This i
 
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
-
-## Closing Thoughts
-
-All projects are different and of course the practices mentioned in this post are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within an organisation makes things work smoother. It reduces setup time and makes it easy for new project members to start contributing. Just make sure that the documentation for your practices is alive and evolves over time.
-
-
 
 <p class="notice"><strong>Care about things like this?</strong> We are currently looking for Javascript and Ruby developers with a keen eye for details to join our team at <a href="http://oktavilla.se">Oktavilla</a>. <a href="mailto:arvid.andersson@oktavilla.se">Get in touch if you want to know more.</a></p>
 
