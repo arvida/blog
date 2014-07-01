@@ -6,7 +6,7 @@ At [Oktavilla](http://oktavilla.se) we regularly start new projects. Over the ye
 
 In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information. 
 
-Let's start out with the most important file in a project.
+Let’s start out with the most important file in a project.
 
 ## The README file
 
@@ -26,7 +26,7 @@ Include a list of dependencies that need to be installed separately. For example
 
 ### Local development setup
 
-Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the project's code. This can be notes on how to install needed packages, start the application and run the tests. 
+Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a freshly made copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests. 
 
 Use concrete examples like what to type into the shell to invoke the different tasks.
 
@@ -42,7 +42,7 @@ For example, if you use [Heroku](http://heroku.com), include concrete example on
 
 * [Readme Driven Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)
 * [How To Write A Great README](http://robots.thoughtbot.com/how-to-write-a-great-readme)
-* [The Most Important Code Isn't Code](http://zachholman.com/posts/documentation/)
+* [The Most Important Code Isn’t Code](http://zachholman.com/posts/documentation/)
 
 ## Git
 
@@ -64,7 +64,7 @@ Use a web based git hosting alternative like [GitHub](https://github.com/) or [B
 
 Use this for discussion and to spread knowledge about different parts of the code base by [code reviews](http://en.wikipedia.org/wiki/Code_review). Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master. 
 
-Be open to discussion, but don't let the review process hold back a merge to long. It is every team member's responsibility to be keep the process quick and smooth within reasonable limits.
+Be open to discussion, but don’t let the review process hold back a merge to long. It is every team member’s responsibility to be keep the process quick and smooth within reasonable limits.
 
 It is also a good idea to keep an extra friendly tone in the discussions to avoid misunderstandings and grief. Use [emojis](http://www.emoji-cheat-sheet.com/) to keep the discussion fun and productive.
 
@@ -139,7 +139,7 @@ And like this in production:
 
 When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
 
-And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised for delivery. Therefore don't use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering. 
+And, remember that Amazon S3 is not CDN. It is a service for storing files and it is not optimised for delivery. Therefore don’t use it as a CDN. This is a too common misunderstanding. [CloudFront](http://aws.amazon.com/cloudfront/) is the Amazon CDN offering. 
 
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
