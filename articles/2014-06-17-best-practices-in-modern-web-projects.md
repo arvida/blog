@@ -143,6 +143,7 @@ And, remember that Amazon S3 is not CDN. It is a service for storing files and i
 
 * [The Rails Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html)
 * [connect-assets](https://github.com/adunkman/connect-assets)
+* [More Evidence that Speed Is Key to User Experience](http://www.montparnas.com/articles/more-evidence-that-speed-is-key-to-user-experience/)
 
 ## Closing Thoughts
 
