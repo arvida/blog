@@ -18,7 +18,7 @@ A README should include at least the following sections:
 
 ### Introduction
 
-A brief introduction that explains what the purpose of this project is. Also include the projects role if it is a part of larger architecture, who the client might be and any other information that might be good to know.
+A brief explanation of the projects purpose. Also include the projects role if it is a part of larger architecture, who the client might be and any other information that might be good to know at a introductory level.
 
 ### Dependencies
 
