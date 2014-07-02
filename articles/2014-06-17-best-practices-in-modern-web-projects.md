@@ -110,11 +110,11 @@ Automation is important to avoid human errors. If there are any manual tasks inv
 
 An application should be capable of behaving differently depending of what environment it is running in.
 
-Examples of different behaviours that depend on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mail messages. Using environments you get a common way to handle these special cases.
+Examples of different behaviours that depend on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mails. Using environments you get a common way to handle these special cases.
 
 The default environments are `development`, `test`, `staging` and `production`. Development is the default mode that the application runs in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application runs in when deployed. The production environment is where the actual end users use the application and staging is a replica of production that is used to test changes before they are pushed to production.
 
-The application picks up what environment to run in from a environment variable. These are usually called something like `NODE_ENV` or `RAILS_ENV`.
+The application picks up what environment to run in from an environment variable. These are usually called something like `NODE_ENV` or `RAILS_ENV`.
 
 * [Beyond the default Rails environments](http://signalvnoise.com/posts/3535-beyond-the-default-rails-environments)
 * [The Twelve-Factor App - Dev/prod parity](http://12factor.net/dev-prod-parity)
