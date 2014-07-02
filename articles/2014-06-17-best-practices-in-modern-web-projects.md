@@ -153,4 +153,4 @@ All projects are different and of course the practices mentioned in this post ar
 
 <p class="notice"><strong>Care about things like this?</strong> We are currently looking for Javascript and Ruby developers with a keen eye for details to join our team at <a href="http://oktavilla.se">Oktavilla</a>. <a href="mailto:arvid.andersson@oktavilla.se">Get in touch if you want to know more.</a></p>
 
-_Many thanks to my colleague [Gustaf Forsslund](https://twitter.com/snurra) for a thorough proofreading of this blog post._
+_Many thanks to my colleagues [Gustaf Forsslund](https://twitter.com/snurra) and [Alexis Fellenius](https://twitter.com/alexisfellenius) for proofreading this blog post._
