@@ -135,15 +135,15 @@ Getting your files on the CDN should be part of your automated deployment proced
 
 For example, a stylesheet link tag will look like this in the development environment:
 
-<% highlight :html do %>
-<link href="/style.css" rel="stylesheet" type="text/css">
-<% end %>
+    <% highlight :html do %>
+    <link href="/style.css" rel="stylesheet" type="text/css">
+    <% end %>
 
 And like this in production:
 
-<% highlight :html do %>
-<link href="http://my-cdn.com/style-a06ae46033959f7563b20c5faff6f5e60175253f.css" rel="stylesheet" type="text/css">
-<% end %>
+    <% highlight :html do %>
+    <link href="http://my-cdn.com/style-a06ae46033959f7563b20c5faff6f5e60175253f.css" rel="stylesheet" type="text/css">
+    <% end %>
 
 When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.
 
