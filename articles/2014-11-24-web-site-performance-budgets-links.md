@@ -4,11 +4,11 @@ title: Web site performance budgets link list
 
 If you have started any ambitious web site projects the last year a topic that might have surfaced is ”performance budgets”. 
 
-The term means that you decide which performance metrics matter for a web site and set limits for each metric. It can be metrics like response time, PageSpeed score or the total file size of JavaScript and CSS files. This gives you a ”budget” for each metric. Every time something new is added to the web site you have to make sure the new feature will not break the performance budget.
+The term means that you decide which performance metrics matter for a web site and set limits for each metric. It can be metrics like response time, PageSpeed score or the total file size of JavaScript and CSS files. This gives you a ”budget” for each metric. Every time something new is added to the web site you have to make sure it doesn't break the performance budget.
 
-By setting up a performance budget and continuously monitor that you stay within budget you ensure a project where high performance is a key consideration. This is very recommended as performance is a key part of the user experience.
+By setting up a performance budget and continuously monitor that you stay within budget you ensure a project where high performance is a key consideration. 
 
-## The links
+## What to read/watch/listen to on the topic
 
 I have researched performance budgets a bit recently and I thought I should share the resources I have found interesting on the topic. Hopefully these will give you a good idea of what a performance budget is, how to implement one and why they matter. 
 
