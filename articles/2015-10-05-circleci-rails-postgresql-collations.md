@@ -1,6 +1,9 @@
-# CircleCI with Rails, PostgreSQL and custom collations
+title: CircleCI with Rails, PostgreSQL and custom collations
 
-We are in the process of moving a [RubyOnRails](http://rubyonrails.org/) application from [MySQL](https://www.mysql.com/) to [PostgreSQL](http://www.postgresql.org/). For this appliction we use the excellent [CircleCI](https://circleci.com) to automatically run the test suit when new commits are pushed to GitHub. This application is in swedish so we want to setup the database with collation set to `sv_SE.UTF-8` to make sorting work correctly. 
+~
+
+
+At [Oktavilla](http://oktavilla.se/) we are in the process of moving a [RubyOnRails](http://rubyonrails.org/) application from [MySQL](https://www.mysql.com/) to [PostgreSQL](http://www.postgresql.org/). For this appliction we use the excellent [CircleCI](https://circleci.com) to automatically run the test suit when new commits are pushed to GitHub. This application is in swedish so we want to setup the database with collation set to `sv_SE.UTF-8` to make sorting work correctly. 
 
 This didn't work out of the box on CircleCI. After some testing and reading we ended up with this:
 
