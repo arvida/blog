@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Hosting a static site on S3 with some ruby help</title>
+  <meta name="description" content="I recently did a one pager called emoji-cheat-sheet.com. The background to why I made this site is pretty simple, I like those little emoji emoticons. Both 3...">
+  <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Shanti' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.arvidandersson.se/2011/10/19/hosting-a-static-site-on-s3-emoji-cheat-sheet-com">
+  <link rel="alternate" type="application/rss+xml" title="waiworinao ★ notes by arvid andersson" href="http://blog.arvidandersson.se/feed.xml" />
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">waiworinao ★ notes by arvid andersson</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="http://arvidandersson.se">About</a>
+        <a class="page-link" href="https://twitter.com/arvid_a">@arvid_a</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Hosting a static site on S3 with some ruby help</h1>
+    <p class="post-meta">Oct 19, 2011</p>
+  </header>
+
+  <article class="post-content">
+    <p>I recently did a one pager called <a href="http://Emoji-cheat-sheet.com">emoji-cheat-sheet.com</a>. The background to why I made this site is pretty simple, I like those little <a href="http://en.wikipedia.org/wiki/Emoji">emoji emoticons</a>. Both 37signals <a href="http://campfirenow.com/">Campfire</a> and <a href="https://github.com/blog/816-emoji">GitHub</a> supports emojis by using a syntax like <code>:cake:</code> which will generate a <img src="http://www.emoji-cheat-sheet.com/graphics/emojis/cake.png" height="22" width="22" />. The problem is that there are quite a few emojis that you can use on these services and they support a different set of emoticons.<br />
+I created a little cheat sheet that just lists which ones are supported on each service and put it online if someone else would be interested in it. If you got flash enabled you can just click the emoji code and it will be copied to your clipboard using <a href="http://www.steamdev.com/zclip/">zClip</a>.</p>
+
+<p>The site is basically one html file, a css file, a flash, a bit of javascript and a some graphic files. You can check out the source code on GitHub at <a href="http://github.com/arvida/emoji-cheat-sheet.com">github.com/arvida/emoji-cheat-sheet.com</a>. <br />As someone who usually writes ruby all day it’s a pretty fun to do a small project where you are forced to think a bit about and try to do the web design for a site.</p>
+
+<h2 id="s3-for-hosting">S3 for hosting</h2>
+
+<p>As emoji-cheat-sheet.com is just a static site I decided to try out using Amazon’s <a href="http://aws.amazon.com/s3/">S3</a> for hosting it. There was basically two tiny issues I encountered:</p>
+
+<ul>
+  <li><strong>You can’t use naked domains</strong> S3 only works with CNAME records and I had to add a redirect for http://emoji-cheat-sheet.com that goes to http://www.emoji-cheat-sheet.com.</li>
+  <li><strong>S3 defaults some files to <code>binary/octet-stream</code></strong> If a browser get this mime-type for a file it expects it to be a binary file that should be downloaded to disk.</li>
+</ul>
+
+<h3 id="how-to-do-the-s3-setup">How to do the S3 setup</h3>
+
+<p>Log into your AWS account and create a bucket that has the the same name as the domain your want to host on S3. The domain must include a ”www.” or be a subdomain.
+Select your newly created bucket and click ”Properties” in the ”Action” popup menu. Choose the ”Website” tab, enable it and enter ”index.html” as the index document filename. Copy the the endpoint url and create a CNAME record for your domain that points to the endpoint. Now you just need to upload the files to the bucket.</p>
+
+<h2 id="making-it-easy-to-deploy-with-ruby">Making it easy to deploy with ruby</h2>
+
+<p>I did some quick googling trying to find a simple automated solution for uploading and minimizing files to S3 for sites like this but I didn’t really find any solution. I ended up hacking together a little rake task using the excellent <a href="https://github.com/geemus/fog">fog gem</a> for S3 interaction, detecting mime types with the old <a href="https://rubygems.org/gems/mime-types">mime-types</a> gem and minimizing the css and js with <a href="http://developer.yahoo.com/yui/compressor/">yuicompressor</a> (you can <a href="https://github.com/mxcl/homebrew/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Library/Formula/yuicompressor.rb">install it using homebrew</a> these days).</p>
+
+<p>It is basically the two classes <a href="https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile#L18">Site</a> and <a href="https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile#L100">SiteFile</a> wrapped into a module called <a href="https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile#L12">SimpleS3Deploy</a> for simple interaction.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">SimpleS3Deploy</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">deploy</span><span class="p">(</span><span class="n">site_path</span><span class="p">)</span>
+    <span class="no">Site</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">site_path</span><span class="p">).</span><span class="nf">deploy</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">Site</span>
+    <span class="c1"># skipping some lines ..</span>
+    <span class="k">def</span> <span class="nf">deploy</span>
+      <span class="nb">puts</span> <span class="s2">" ** Deploying </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">bucket</span><span class="p">.</span><span class="nf">key</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">" ==============================================="</span>
+      <span class="nb">puts</span> <span class="s2">" ** Deleting existing remote files"</span>
+      <span class="n">clear_bucket</span>
+      <span class="nb">puts</span> <span class="s2">" ** Uploading files"</span>
+      <span class="n">files</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+        <span class="k">if</span> <span class="o">!</span><span class="no">File</span><span class="p">.</span><span class="nf">directory?</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="nf">path</span><span class="p">)</span>
+          <span class="n">remote_file_name</span> <span class="o">=</span> <span class="n">file_base_path</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="nf">path</span><span class="p">)</span>
+          <span class="nb">puts</span> <span class="s2">"      Uploading </span><span class="si">#{</span><span class="n">remote_file_name</span><span class="si">}</span><span class="s2">"</span>
+          <span class="n">bucket</span><span class="p">.</span><span class="nf">files</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+            <span class="ss">key: </span><span class="n">remote_file_name</span><span class="p">,</span>
+            <span class="ss">body: </span><span class="n">file</span><span class="p">.</span><span class="nf">is_minifyable?</span> <span class="p">?</span> <span class="nb">open</span><span class="p">(</span><span class="n">minify</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="nf">path</span><span class="p">))</span> <span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="nf">path</span><span class="p">),</span>
+            <span class="ss">public: </span><span class="kp">true</span><span class="p">,</span>
+            <span class="ss">content_type: </span><span class="n">file</span><span class="p">.</span><span class="nf">mime_type</span><span class="p">,</span>
+            <span class="ss">cache_control: </span><span class="s1">'max-age=604800, public'</span> <span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+      <span class="k">if</span> <span class="vi">@tmp_files</span><span class="p">.</span><span class="nf">any?</span>
+        <span class="nb">puts</span> <span class="s2">" ** Cleaning up tmp files"</span>
+        <span class="n">cleanup</span>
+      <span class="k">end</span>
+      <span class="nb">puts</span> <span class="s2">"** Done"</span>
+    <span class="k">end</span>
+    <span class="c1"># skipping some lines ..</span>
+    <span class="k">def</span> <span class="nf">files</span>
+      <span class="vi">@files</span> <span class="o">||=</span> <span class="no">Dir</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">/**/*"</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">SiteFile</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">minify</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+      <span class="s2">"</span><span class="si">#{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">-tmp"</span><span class="p">.</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">tmp_file_name</span><span class="o">|</span>
+        <span class="sb">`yuicompressor -o </span><span class="si">#{</span><span class="n">tmp_file_name</span><span class="si">}</span><span class="sb"> </span><span class="si">#{</span><span class="n">file_path</span><span class="si">}</span><span class="sb">`</span>
+        <span class="n">tmp_files</span> <span class="o">&lt;&lt;</span> <span class="n">tmp_file_name</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">bucket</span>
+      <span class="vi">@bucket</span> <span class="o">||=</span> <span class="n">s3</span><span class="p">.</span><span class="nf">directories</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'s3'</span><span class="p">][</span><span class="s1">'bucket'</span><span class="p">])</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">s3</span>
+      <span class="vi">@s3</span> <span class="o">||=</span> <span class="no">Fog</span><span class="o">::</span><span class="no">Storage</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span>
+        <span class="ss">provider: </span><span class="s1">'AWS'</span><span class="p">,</span>
+        <span class="ss">aws_secret_access_key: </span><span class="n">config</span><span class="p">[</span><span class="s1">'s3'</span><span class="p">][</span><span class="s1">'secret_access_key'</span><span class="p">],</span>
+        <span class="ss">aws_access_key_id: </span><span class="n">config</span><span class="p">[</span><span class="s1">'s3'</span><span class="p">][</span><span class="s1">'access_key_id'</span><span class="p">]</span> <span class="p">})</span>
+    <span class="k">end</span>
+
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">SiteFile</span>
+    <span class="c1"># skipping some lines ..</span>
+    <span class="k">def</span> <span class="nf">is_minifyable?</span>
+      <span class="n">is_css_file?</span> <span class="n">or</span> <span class="n">is_js_file?</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">is_css_file?</span>
+      <span class="n">path</span><span class="p">.</span><span class="nf">end_with?</span><span class="p">(</span><span class="s1">'.css'</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">is_js_file?</span>
+      <span class="n">path</span><span class="p">.</span><span class="nf">end_with?</span><span class="p">(</span><span class="s1">'.js'</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">mime_type</span>
+      <span class="no">MIME</span><span class="o">::</span><span class="no">Types</span><span class="p">.</span><span class="nf">type_for</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nf">to_s</span>
+    <span class="k">end</span>
+
+  <span class="k">end</span>
+
+<span class="k">end</span></code></pre></figure>
+
+<p>The rake task:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">task</span> <span class="ss">:deploy</span> <span class="k">do</span>
+  <span class="no">SimpleS3Deploy</span><span class="p">.</span><span class="nf">deploy</span><span class="p">(</span><span class="s1">'public'</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>You can checkout the source code for this <a href="https://github.com/arvida/emoji-cheat-sheet.com/blob/8cea07735e8c3cdc880e53dcc991b0d365478226/Rakefile">on GitHub</a>. It’s pretty basic stuff that has room for improvements and tests, but it makes deploying a static site like <a href="http://emoji-cheat-sheet.com">emoji-cheat-sheet.com</a> to S3 much easier.</p>
+
+<p>I think S3 is a pretty neat solution for hosting static sites, I like how easy it is to specify http headers for files and setting up a new site. The only downside is that it isn’t super fast, but that is easy to fix by creating a CloudFront distribution that uses the S3 bucket as origin and pointing your domain the CloudFront distribution instead.</p>
+
+  </article>
+
+
+  <div id="disqus_thread" style="clear:both;"></div>
+  <script type="text/javascript" src="http://disqus.com/forums/blog-arvidandersson/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/blog-arvidandersson/?url=ref">View the discussion thread.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p>waiworinao ★ a blog by <a href="http://arvidandersson.se/">Arvid Andersson</a></p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20637790-3', 'arvidandersson.se');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to install Ruby 2.0 (ruby-head) with RVM</title>
+  <meta name="description" content="I got a bit excited when I read about the Ruby 2.0.0 ‘Feature Freeze’ and wanted to give ruby 2.0 a test.">
+  <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Shanti' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.arvidandersson.se/2012/10/29/installing-ruby-2-0-with-rvm">
+  <link rel="alternate" type="application/rss+xml" title="waiworinao ★ notes by arvid andersson" href="http://blog.arvidandersson.se/feed.xml" />
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">waiworinao ★ notes by arvid andersson</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="http://arvidandersson.se">About</a>
+        <a class="page-link" href="https://twitter.com/arvid_a">@arvid_a</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">How to install Ruby 2.0 (ruby-head) with RVM</h1>
+    <p class="post-meta">Oct 29, 2012</p>
+  </header>
+
+  <article class="post-content">
+    <p>I got a bit excited when I read about the <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/46258?utm_source=rubyweekly&amp;utm_medium=email">Ruby 2.0.0 ‘Feature Freeze’</a> and wanted to give ruby 2.0 a test.</p>
+
+<p>This is what I did to get it installed on Mac OS X 10.8.2 with <a href="http://rvm.beginrescueend.com/">RVM</a> (and <a href="http://mxcl.github.com/homebrew/">Homebrew</a>).</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>brew install autoconf
+<span class="gp">$ </span>brew install automake
+<span class="gp">$ </span>brew install libyaml
+
+<span class="gp">$ </span>rvm install ruby-head</code></pre></figure>
+
+<p>To use it you just have to tell RVM to use it:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>rvm use ruby-head
+<span class="gp">$ </span>ruby --version
+ruby 2.0.0dev <span class="o">(</span>2012-10-12 trunk 37163<span class="o">)</span> <span class="o">[</span>x86_64-darwin12.2.0]</code></pre></figure>
+
+<p>When it is installed you can for example test out named arguments:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># named_arguments.rb</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="ss">name: </span><span class="s1">'world'</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"hello </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+
+<span class="n">hello</span> <span class="ss">name: </span><span class="s1">'boss'</span></code></pre></figure>
+
+<p><br /></p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>ruby named_arguments.rb
+hello boss</code></pre></figure>
+
+<h2 id="read-more-about-ruby-20">Read more about Ruby 2.0</h2>
+
+<ul>
+  <li><a href="https://bugs.ruby-lang.org/projects/ruby-trunk/roadmap#2.0.0">Ruby 2.0 feature list</a></li>
+  <li><a href="http://kresimirbojcic.com/2012/08/23/things-to-look-forward-to-in-ruby-2-dot-0.html">Things to Look
+Forward to in Ruby 2.0</a></li>
+  <li><a href="http://tenderlovemaking.com/2012/09/07/protected-methods-and-ruby-2-0.html">PROTECTED METHODS AND RUBY 2.0</a></li>
+  <li><a href="http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0">Why You Should Be Excited About Garbage Collection in Ruby 2.0</a></li>
+</ul>
+
+  </article>
+
+
+  <div id="disqus_thread" style="clear:both;"></div>
+  <script type="text/javascript" src="http://disqus.com/forums/blog-arvidandersson/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/blog-arvidandersson/?url=ref">View the discussion thread.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p>waiworinao ★ a blog by <a href="http://arvidandersson.se/">Arvid Andersson</a></p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20637790-3', 'arvidandersson.se');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>

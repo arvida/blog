@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Significance of the HTTP Date header</title>
+  <meta name="description" content="I have been doing some work over the last week that involves serving files with ActionController’s #send_file method. One problem I stumbled upon was that my...">
+  <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Shanti' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.arvidandersson.se/2011/10/29/significance-of-the-http-date-header">
+  <link rel="alternate" type="application/rss+xml" title="waiworinao ★ notes by arvid andersson" href="http://blog.arvidandersson.se/feed.xml" />
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">waiworinao ★ notes by arvid andersson</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="http://arvidandersson.se">About</a>
+        <a class="page-link" href="https://twitter.com/arvid_a">@arvid_a</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Significance of the HTTP Date header</h1>
+    <p class="post-meta">Oct 29, 2011</p>
+  </header>
+
+  <article class="post-content">
+    <p>I have been doing some work over the last week that involves serving files with ActionController’s <a href="http://api.rubyonrails.org/classes/ActionController/DataStreaming.html#method-i-send_file">#send_file</a> method. One problem I stumbled upon was that my <code>Cache-Control</code> headers didn’t get respected and I was getting <code>X-Cache: Miss from cloudfront</code> repeatedly when doing requests through <a href="http://aws.amazon.com/cloudfront">CloudFront</a>.</p>
+
+<p>It turn’s out that the problem is that <code>#send_file</code> doesn’t include a Date HTTP header when creating the HTTP response headers. <strong>The Date header is used to tell the client  at what time the response was generated and it is this value that the client uses when calculating how long the local cache of the response is going to be valid.</strong> If it is not included the clients browser will not cache the response according to the <code>Cache-Control</code> header and CloudFront won’t know how long to save the file.</p>
+
+<p>It’s easy to fix, just add a Date header to the response  where you use #send_file. For example:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">expires_in</span> <span class="mi">1</span><span class="p">.</span><span class="nf">year</span><span class="p">,</span> <span class="ss">public: </span><span class="kp">true</span>
+<span class="n">response</span><span class="p">.</span><span class="nf">header</span><span class="p">[</span><span class="s1">'Date'</span><span class="p">]</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">httpdate</span>
+<span class="n">send_file</span> <span class="n">file</span><span class="p">.</span><span class="nf">path</span><span class="p">,</span> <span class="ss">filename: </span><span class="n">file</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="ss">type: </span><span class="n">file</span><span class="p">.</span><span class="nf">mime_type</span></code></pre></figure>
+
+<p>It is important that your use <code>#httpdate</code> when setting the date header so the returned string can be understod by the client.</p>
+
+<p>You can read more about the Date header in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">RFC 2616</a>.</p>
+
+<h3 id="update---october-30th-2011">UPDATE - October 30th 2011</h3>
+
+<p>After a bit of research I found that this issue looks to be <a href="http://code.google.com/p/phusion-passenger/issues/detail?id=485">related to that I am using passenger and nginx</a> in the project where I noticed the missing Date header. I looks like the passenger guys agrees that this is an issue and plans to fix it.</p>
+
+<p>This issue is kind of interesting; for example <a href="http://unicorn.bogomips.org/">unicorn</a> sets the Date header and <a href="http://code.macournoyer.com/thin/">thin</a> doesn’t. 
+<em>It raises the question: <strong>What part of the stack is responsible for setting what response header?</strong></em></p>
+
+<p>The answer is pretty easy for most of the response headers but with Date I am not so sure. If I use <code>expires_in</code> in my Rails app I expect that the Date header is set but if I just do a plain <code>response['Cache-Control'] = "public, max-age=3600"</code> in a <a href="http://www.sinatrarb.com/">Sinatra</a> app I am not sure if Sinatra should be responsible for the Date header. Maybe it should be the front webserver that ensures that the Date header is always set? I guess some more research is needed.</p>
+
+<h3 id="update---november-12th-2011">UPDATE - November 12th 2011</h3>
+
+<p>I did a patch for Rails last week that ensures that the Date header is sent when you use <code>expires_in</code>. You can check out <a href="https://github.com/rails/rails/pull/3479">the pull request over at github</a>.</p>
+
+<p>If you got any comments or thoughts on this issue, let me know as I think it’s quite a interesting topic and would like to hear what other people think of this.</p>
+
+<h3 id="update---february-18th-2012">UPDATE - February 18th 2012</h3>
+
+<p>The patch was accepted and merged today. Yay!</p>
+
+  </article>
+
+
+  <div id="disqus_thread" style="clear:both;"></div>
+  <script type="text/javascript" src="http://disqus.com/forums/blog-arvidandersson/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/blog-arvidandersson/?url=ref">View the discussion thread.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p>waiworinao ★ a blog by <a href="http://arvidandersson.se/">Arvid Andersson</a></p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20637790-3', 'arvidandersson.se');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>
