@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to install Ruby 1.9.3rc1 with RVM</title>
+  <meta name="description" content="Today Ruby 1.9.3 RC1 was released, it’s a faster version of ruby with a couple of new features. Peter Cooper has written a nice summary about the new stuff i...">
+  <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Shanti' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.arvidandersson.se/2011/09/24/install-ruby-193-rc1-with-rvm">
+  <link rel="alternate" type="application/rss+xml" title="waiworinao ★ notes by arvid andersson" href="http://blog.arvidandersson.se/feed.xml" />
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">waiworinao ★ notes by arvid andersson</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="http://arvidandersson.se">About</a>
+        <a class="page-link" href="https://twitter.com/arvid_a">@arvid_a</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">How to install Ruby 1.9.3rc1 with RVM</h1>
+    <p class="post-meta">Sep 24, 2011</p>
+  </header>
+
+  <article class="post-content">
+    <p>Today Ruby 1.9.3 RC1 was <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/388203">released</a>, 
+it’s a faster version of ruby with a couple of new features. Peter Cooper has written 
+a nice summary about the new stuff in ruby 1.9.3 <a href="http://www.rubyinside.com/ruby-1-9-3-introduction-and-changes-5428.html">over at RubyInside</a>.</p>
+
+<p><a href="http://beginrescueend.com/">Ruby Version Manager</a> hasn’t added RC1 to it’s known rubies yet, but 
+you can still install it by specifying the tag <a href="https://github.com/ruby/ruby/tree/v1_9_3_rc1">v1_9_3_rc1</a> to the rvm install command:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">  ~ $ rvm install 1.9.3-tv1_9_3_rc1</code></pre></figure>
+
+<p>After finishing the install it’s pretty nice to add a more rememberable alias for RC1:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text"> ~ $ rvm alias create ruby-1.9.3-rc1 ruby-1.9.3-tv1_9_3_rc1
+ ~ $ rvm use ruby-1.9.3-rc1</code></pre></figure>
+
+<p>Also if you have a lot of gems, you can copy them with <a href="http://beginrescueend.com/rubies/upgrading/">RVM’s copy and migrate commands</a>.</p>
+
+  </article>
+
+
+  <div id="disqus_thread" style="clear:both;"></div>
+  <script type="text/javascript" src="http://disqus.com/forums/blog-arvidandersson/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/blog-arvidandersson/?url=ref">View the discussion thread.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p>waiworinao ★ a blog by <a href="http://arvidandersson.se/">Arvid Andersson</a></p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20637790-3', 'arvidandersson.se');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>

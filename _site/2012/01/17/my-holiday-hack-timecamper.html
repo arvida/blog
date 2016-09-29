@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>My holiday hack: TimeCamper</title>
+  <meta name="description" content="Background">
+  <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Shanti' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.arvidandersson.se/2012/01/17/my-holiday-hack-timecamper">
+  <link rel="alternate" type="application/rss+xml" title="waiworinao ★ notes by arvid andersson" href="http://blog.arvidandersson.se/feed.xml" />
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">waiworinao ★ notes by arvid andersson</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="http://arvidandersson.se">About</a>
+        <a class="page-link" href="https://twitter.com/arvid_a">@arvid_a</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">My holiday hack: TimeCamper</h1>
+    <p class="post-meta">Jan 17, 2012</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="background">Background</h2>
+
+<p>When going on holiday around christmas I usually have some small project that I feel I haven’t had that much time to work on and decides that I am going to try to finish that during the holiday. Most of the time I do some hacking and end up with some half working code that I forget about. This time I think I managed to finish something (at least a beta).</p>
+
+<p>I recently read Steven Pressfield’s <a href="http://www.amazon.com/Do-the-Work-ebook/dp/B004PGO25O">Do the work</a>, a book about finishing projects. It is written as a hand book when working on a project and is very inspirational. It makes you think about how you are going to get things done and how to avoid not finishing your current project.</p>
+
+<p>With the ideas from Do the work in mind I decided to finally make something out of a idea I have been toying around with for a while: a menu based Mac OS X app for tracking and reporting time to the <a href="http://basecamphq.com/tour/deliver#/deliver">time tracking functionality in 37signals Basecamp</a>. At <a href="http://oktavilla.se">Oktavilla</a> we have been using this Basecamp feature a lot when working on client projects and it works great when the time has been reported but I haven’t really found any tools for reporting time that fit the way I work and I always end up having to back log time for different reasons. There are probably a great app for this out there that I have missed.</p>
+
+<h3 id="key-features">Key features</h3>
+
+<p>I sat down and decided the three most important features for me:</p>
+
+<ol>
+  <li>I want to be able to report time without having to use the mouse, it should just be few key presses to start and stop tracking time and submitting it</li>
+  <li>Auto-completion on the task description</li>
+  <li>Subtle presence; it stays out of the way when your are not interacting with it and it should be very fast and easy to access when desired</li>
+</ol>
+
+<h2 id="the-result">The result</h2>
+
+<p>The idea was pretty simple but as I am no Objective-C programmer and not that familiar with Cocoa it’s been taking some time.</p>
+
+<p>The result is a app called <a href="http://timecamper.com/">TimeCamper</a>. It’s still very much in beta but I’ve been using it in my day to day work since getting back after the holidays and it does the job for me.</p>
+
+<div style="text-align:center;"><img src="http://www.timecamper.com/graphics/screenshot.png" /></div>
+
+<p>I implemented the key features like this:</p>
+
+<ol>
+  <li>The main form elements are accessible with the tab and space keys</li>
+  <li>Submitted descriptions are saved and they will pop up as suggestions as you start to type a new description</li>
+  <li>Assignable hotkey for triggering focus and visibility of the window</li>
+</ol>
+
+<p>If TimeCamper sounds like something useful for you, check it out at <a href="http://timecamper.com">timecamper.com</a>. And feel free to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#097;&#114;&#118;&#105;&#100;&#046;&#097;&#110;&#100;&#101;&#114;&#115;&#115;&#111;&#110;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">submit feedback and bug reports</a>.</p>
+
+<h3 id="getting-to-know-objective-c">Getting to know Objective-C</h3>
+
+<p>It’s been interesting to get learn Objective-C and Cocoa more in depth, I think it’s a very enjoyable combo to work with. Apple has some great documentation, there are loads of libraries out there to speed up development like <a href="http://restkit.org">RestKit</a>, <a href="http://sparkle.andymatuschak.org/">Sparkle</a> and <a href="https://github.com/precipice/HAKeychain">HAKeychain</a>. Also named arguments are really nice and there are a lot of sweet built in utilities like NSObject’s <a href="http://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/nsobject_Class/Reference/Reference.html#//apple_ref/occ/instm/NSObject/performSelector:withObject:afterDelay:"><code>performSelector:withObject:afterDelay:</code></a> that let’s you invoke a method on a object after a delay.</p>
+
+<p>There is <a href="http://splinter.com.au/in-defence-of-objective-c">a good blog post by Chris Hulbert</a> explaining some of the things you might react to when starting to look into Objective-C.</p>
+
+  </article>
+
+
+  <div id="disqus_thread" style="clear:both;"></div>
+  <script type="text/javascript" src="http://disqus.com/forums/blog-arvidandersson/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/blog-arvidandersson/?url=ref">View the discussion thread.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p>waiworinao ★ a blog by <a href="http://arvidandersson.se/">Arvid Andersson</a></p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20637790-3', 'arvidandersson.se');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>

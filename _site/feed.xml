@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>waiworinao ★ notes by arvid andersson</title>
+    <description></description>
+    <link>http://blog.arvidandersson.se/</link>
+    <atom:link href="http://blog.arvidandersson.se/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 29 Sep 2016 20:34:32 +0200</pubDate>
+    <lastBuildDate>Thu, 29 Sep 2016 20:34:32 +0200</lastBuildDate>
+    <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>CircleCI with Rails, PostgreSQL and custom collation</title>
+        <description>&lt;p&gt;At &lt;a href=&quot;http://oktavilla.se/&quot;&gt;Oktavilla&lt;/a&gt; we are in the process of moving a &lt;a href=&quot;http://rubyonrails.org/&quot;&gt;RubyOnRails&lt;/a&gt; application from &lt;a href=&quot;https://www.mysql.com/&quot;&gt;MySQL&lt;/a&gt; to &lt;a href=&quot;http://www.postgresql.org/&quot;&gt;PostgreSQL&lt;/a&gt;. For this appliction we use the excellent &lt;a href=&quot;https://circleci.com&quot;&gt;CircleCI&lt;/a&gt; to automatically run the test suit when new commits are pushed to GitHub. This application is in swedish so we want to setup the database with collation set to &lt;code class=&quot;highlighter-rouge&quot;&gt;sv_SE.UTF-8&lt;/code&gt; to make sorting work correctly.&lt;/p&gt;
+
+&lt;p&gt;This didn’t work out of the box on CircleCI. After some testing and reading we ended up with this.&lt;/p&gt;
+
+&lt;p&gt;A custom &lt;code class=&quot;highlighter-rouge&quot;&gt;database.yml&lt;/code&gt; for CircleCI. Create a file in config/database.ci.yml with:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;s&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;strict&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;circle_ruby_test&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;postgresql&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;localhost&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf8&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;collation&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sv_SE.UTF-8&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;template0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note that &lt;code class=&quot;highlighter-rouge&quot;&gt;collation&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;template&lt;/code&gt; is set. Read more on PostgreSQL database templates in &lt;a href=&quot;http://www.postgresql.org/docs/9.3/static/manage-ag-templatedbs.html&quot;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Our &lt;code class=&quot;highlighter-rouge&quot;&gt;circle.yml&lt;/code&gt; looks like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;s&quot;&gt;machine&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;SPEC_OPTS&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;--format&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;doc'&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;PGDATA&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/lib/postgresql/9.4/main&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;dependencies&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sudo locale-gen sv_SE.UTF-8&lt;/span&gt; 
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sudo -E -u postgres /usr/lib/postgresql/9.4/bin/pg_ctl restart; sleep 1&lt;/span&gt; 
+&lt;span class=&quot;s&quot;&gt;database&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;override&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mv config/database.ci.yml config/database.yml&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle exec rake db:create db:schema:load --trace&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;First we have to create the system locale using &lt;code class=&quot;highlighter-rouge&quot;&gt;locale-gen&lt;/code&gt;. This requires a restart of PostgreSQL and some sleep time to let it finish the startup sequence. Then we override the default database setup and use our own &lt;code class=&quot;highlighter-rouge&quot;&gt;database.ci.yml&lt;/code&gt; and create the database.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 05 Oct 2015 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2015/10/05/circleci-rails-postgresql-collations</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2015/10/05/circleci-rails-postgresql-collations</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Web site performance budgets link list</title>
+        <description>&lt;p&gt;If you have started any ambitious web site projects the last year a topic that might have surfaced is ”performance budgets”.&lt;/p&gt;
+
+&lt;p&gt;The term means that you decide which performance metrics matter for a web site and set limits for each metric. It can be metrics like response time, PageSpeed score or the total file size of JavaScript and CSS files. This gives you a ”budget” for each metric. Every time something new is added to the web site you have to make sure it doesn’t break the performance budget.&lt;/p&gt;
+
+&lt;p&gt;By setting up a performance budget and continuously monitor that you stay within budget you ensure a project where high performance is a key consideration.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-to-readwatchlisten-to-on-the-topic&quot;&gt;What to read/watch/listen to on the topic&lt;/h2&gt;
+
+&lt;p&gt;I have researched performance budgets a bit recently and I thought I should share the resources I have found interesting on the topic. Hopefully these will give you a good idea of what a performance budget is, how to implement one and why they matter.&lt;/p&gt;
+
+&lt;h3 id=&quot;start-out-with-these&quot;&gt;1. Start out with these&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tagman.com/mdp-blog/2012/03/just-one-second-delay-in-page-load-can-cause-7-loss-in-customer-conversions/&quot;&gt;Just One Second Delay In Page-Load Can Cause 7% Loss In Customer Conversions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bradfrost.com/blog/post/performance-as-design/&quot;&gt;Performance As Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://timkadlec.com/2014/11/performance-budget-metrics/&quot;&gt;Performance Budget Metrics&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;on-working-with-performance-budgets&quot;&gt;2. On working with performance budgets&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.smashingmagazine.com/2014/09/08/improving-smashing-magazine-performance-case-study/&quot;&gt;Improving Smashing Magazine’s Performance: A Case Study&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vimeo.com/108328247&quot;&gt;Yesenia Perez-Cruz ”Design Decisions Through The Lens Of A Performance Budget”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://responsivedesign.is/articles/rwd-podcast-episode-21-patrick-hamann&quot;&gt;RWD podcast episode #21 : Patrick Hamann&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://clearleft.com/thinks/responsivedesignonabudget/&quot;&gt;Responsive Design on a Budget&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.twitter.com/2012/improving-performance-on-twittercom&quot;&gt;Improving performance on twitter.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;technical-side-of-things-and-tools&quot;&gt;3. Technical side of things and tools&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sitepoint.com/automate-performance-testing-grunt-js/&quot;&gt;Automate Performance Testing with Grunt.js&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://timkadlec.com/2014/05/performance-budgeting-with-grunt/&quot;&gt;Performance Budgeting With Grunt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=R8W_6xWphtw&quot;&gt;Paul Irish ”Delivering the goods”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.webpagetest.org/&quot;&gt;WebPageTest&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index&quot;&gt;How Speed Index on webpagetest.org works&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/marcelduran/webpagetest-api&quot;&gt;WebPageTest API wrapper for NodeJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developers.google.com/speed/docs/insights/v1/getting_started&quot;&gt;Google PageSpeed Insights API&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/guardian/grunt-asset-monitor&quot;&gt;grunt-asset-monitor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let me know if you have any link suggestions on the topic.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 24 Nov 2014 00:00:00 +0100</pubDate>
+        <link>http://blog.arvidandersson.se/2014/11/24/web-site-performance-budgets-links</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2014/11/24/web-site-performance-budgets-links</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Apps that I always have open on my laptop</title>
+        <description>&lt;p&gt;In this blog post I list some of the applications I use to make my life easier and more productive. These are Mac applications that is constantly open on my laptop in the fall of 2014. I would definitely recommend all of them.&lt;/p&gt;
+
+&lt;h2 id=&quot;evernotehttpsevernotecom&quot;&gt;&lt;a href=&quot;https://evernote.com&quot;&gt;Evernote&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Evernote is great. I use it for almost all of my writing - whether it is meeting notes, e-mail drafts, blog posts or just random scribble. It is so simple and does the job of saving my notes most excellently. The only thing I miss is some kind of syntax highlighting for code and markdown support.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-hit-listhttpwwwkareliacomproductsthe-hit-listmachtml&quot;&gt;&lt;a href=&quot;http://www.karelia.com/products/the-hit-list/mac.html&quot;&gt;The Hit List&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The Hit List is a sophisticated todo list manager. I started to use this application after I had read the &lt;a href=&quot;http://www.amazon.com/Getting-Things-Done-Stress-Free-Productivity/dp/0142000280&quot;&gt;Getting things done&lt;/a&gt; book a couple of years back. The application is a bit rough around the edges but it really works for me as I continue to use it to do my own basic version of GTD.&lt;/p&gt;
+
+&lt;h2 id=&quot;macvimhttpsgithubcomb4wincklermacvim&quot;&gt;&lt;a href=&quot;https://github.com/b4winckler/macvim&quot;&gt;MacVim&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Vim takes a while to learn but once you are used to it almost becomes part of your subconscious. There is always something new to learn just when you feel like you have mastered a command. It was well worth learning it as I now have editor that has been customised to my own needs over a couple of years. Also as a bonus it is available on most UN*X like systems which means I always have a familiar editor available when I am working on someone else’s machine.&lt;/p&gt;
+
+&lt;h2 id=&quot;iterm2httpiterm2com&quot;&gt;&lt;a href=&quot;http://iterm2.com&quot;&gt;iTerm2&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;This is a replacement for Apple’s terminal emulator ”Terminal” that is great. It has a lot of options for customisation. For example I have mapped it so I can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;hjkl&lt;/code&gt;-keys to move around between panes and tabs. Just like I am used to from vim. To make it look beautiful I have combined the &lt;a href=&quot;https://github.com/chriskempson/tomorrow-theme&quot;&gt;Tomorrow Night Bright color scheme&lt;/a&gt; with the &lt;a href=&quot;http://en.wikipedia.org/wiki/Menlo_(typeface)&quot;&gt;Menlo font&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;dashhttpkapelicomdash&quot;&gt;&lt;a href=&quot;http://kapeli.com/dash&quot;&gt;Dash&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;With Dash you can view and search through documentation for things like Ruby, Rails, HTTP Status codes, Go, CSS, AngularJS, Node.js and much more. I have it running the background all the time and can easily make it foreground with a hot-key (alt-space). The interface is navigable by just using the keyboard so it gets really fast to find the right docs when your writing code and need to look up something. Dash has made looking up documentation such a pleasure.&lt;/p&gt;
+
+&lt;h2 id=&quot;mailplanehttpmailplaneappcom&quot;&gt;&lt;a href=&quot;http://mailplaneapp.com/&quot;&gt;Mailplane&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Mailplane is an application that lets you run Googles Gmail and Calendar web apps as desktop applications. I have a couple of different Gmail accounts that I check at least on a daily basis and this app makes it super easy to handle all the different accounts using one window with each account in its own tab. With Mailplane you can also make Gmail the default handler for e-mail links on web pages.&lt;/p&gt;
+
+&lt;h2 id=&quot;stayhttpcordlessdogcomstay&quot;&gt;&lt;a href=&quot;http://cordlessdog.com/stay/&quot;&gt;Stay&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;I regularly move my laptop around and connect different screens. Stay lets me save and restore the position of windows for each combination of displays. For example when I connect my Cinema Display iTerm2 automatically moves to the Cinema Display and The Hit List window moves to the laptop screen. It let me always have a familiar window setup when switching display.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 23 Aug 2014 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2014/08/23/my-tools-fall-2014</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2014/08/23/my-tools-fall-2014</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Git commit messages as documentation</title>
+        <description>&lt;p&gt;Code is all about communicating with your computer and tell it what you want it to do. We also use it to tell our colleagues what we want the computer to do. That is why we invented programming languages that are similar to our human languages.&lt;/p&gt;
+
+&lt;p&gt;But, code is hard to read and understand. In a large system it is often very difficult to follow the different paths through the code.&lt;/p&gt;
+
+&lt;h2 id=&quot;we-have-different-tools-to-make-our-code-understandable&quot;&gt;We have different tools to make our code understandable&lt;/h2&gt;
+
+&lt;p&gt;We write readable code and tests that document the way we expect our code to behave. If we are ambitious, we write comments that can generate documentation.&lt;/p&gt;
+
+&lt;p&gt;And then we have git. It is a very common distributed version control and source code management tool. Most people who work with development these days use git for version control.&lt;/p&gt;
+
+&lt;p&gt;The thing is that if you use the git the right way it will automatically give us a log that describes our source code. Right down to every single line.&lt;/p&gt;
+
+&lt;h2 id=&quot;however-we-have-a-problem&quot;&gt;However we have a problem&lt;/h2&gt;
+
+&lt;p&gt;Sometimes we don’t put that much energy into describing our code changes.&lt;/p&gt;
+
+&lt;p&gt;You often see commits with messages like&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;fix test&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Added some stats to dashboard&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;:sob:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The problem is when we 6 months later discovers a bug that was introduced in the commit &lt;code class=&quot;highlighter-rouge&quot;&gt;Added some stats to dashboard&lt;/code&gt; which is 17 changed files with 231 lines added and 29 deleted lines. Then you stare at your screen and wonder what was going through your head when making all these changes.&lt;/p&gt;
+
+&lt;p&gt;If we would have just put a little a bit more time on describing the changes the code might have been a bit more easy to understand.&lt;/p&gt;
+
+&lt;p&gt;I and many others write commit messages like this sometimes. It is often because of habit, laziness and that you haven’t really thought about the great possibilities commit messages gives us.&lt;/p&gt;
+
+&lt;h1 id=&quot;how-should-we-think-when-writing-commit-messages&quot;&gt;How should we think when writing commit messages?&lt;/h1&gt;
+
+&lt;p&gt;The first step is to divide the work into smaller commits to make it possible to describe the change with a title and a few sentences. If it feels hard to describe the current code changes it is a good sign that is is time to divide the changes into smaller commits.&lt;/p&gt;
+
+&lt;p&gt;I have started to try to think of my commit messages as e-mail messages to myself that I will read in a year or so. Each commit message has a subject and a body. If there is a related issue in GitHub I include a reference to that in the commit message.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-commit-message-parts&quot;&gt;The commit message parts&lt;/h2&gt;
+
+&lt;p&gt;A style that I think works well is this:&lt;/p&gt;
+
+&lt;h3 id=&quot;first-a-subject&quot;&gt;First a subject&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First start with a title or subject, which should be about 70 characters long. Most places where you can see the git commits expect that the topic is around 50 characters. GitHub has a display limit at 70 characters.&lt;/li&gt;
+  &lt;li&gt;If the commit has something to do with an issue and I will add a reference to the first on the subject&lt;/li&gt;
+  &lt;li&gt;The subject should be a short summary of the changes commiten done. Technical details can be saved to the content.&lt;/li&gt;
+  &lt;li&gt;The subject should not end with a period.&lt;/li&gt;
+  &lt;li&gt;The subject is the part of commiten shown most so it’s good to spend time to get it easily understandable and clear.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;second-a-blank-line&quot;&gt;Second a blank line&lt;/h3&gt;
+
+&lt;h3 id=&quot;third-the-full-description&quot;&gt;Third the full description&lt;/h3&gt;
+
+&lt;p&gt;Here, you write a little further description of the change.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the reason for the change.&lt;/li&gt;
+  &lt;li&gt;Why has chosen to do in a specific manner.&lt;/li&gt;
+  &lt;li&gt;Is there anything that can be useful to think about when you look at change, something that is not clear or easy to miss?&lt;/li&gt;
+  &lt;li&gt;Please use bullet points to make it clear.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;tempus&quot;&gt;Tempus&lt;/h1&gt;
+
+&lt;p&gt;There is a saying that one should write the commit messages in the imperative form. That means that you express yourself solicitation, eg the use of “fix” instead of “fixed” or “add” instead of “added”.&lt;/p&gt;
+
+&lt;p&gt;One can say that there are two strong wins to using imperative.&lt;/p&gt;
+
+&lt;p&gt;First, it is so git expresses itself when the automatic commit messages such as “Merge branch ‘master’ of github.com: example / app”. And it is for that describes what changes does when it is applied, not to what it was doing or what is going to happen but this does.
+2nd And they decided a tense makes it unnecessary to consider every time.&lt;/p&gt;
+
+&lt;h1 id=&quot;clearance&quot;&gt;Clearance&lt;/h1&gt;
+
+&lt;p&gt;There is no way that is more right or wrong.&lt;/p&gt;
+
+&lt;p&gt;But I have noticed that when I put more time on my commit messages, I have to reflect more on the changes I make in a project. One can imagine an extraordinary time and it increases quality and it becomes small cohesive commits.&lt;/p&gt;
+
+&lt;p&gt;It becomes incredibly very pleasant to walk through a git log that actually talks about change and not only that something has happened.&lt;/p&gt;
+
+&lt;p&gt;The main thing I think is to realize which fanatically tools git is and how to use the commit messages as a tool to document and understand a project’s history.&lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;p&gt;Tim Pope: “A Note About Git Commit Messages”
+http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html&lt;/p&gt;
+
+&lt;p&gt;Guidelines for making patched to Git
+http://git.kernel.org/cgit/git/git.git/tree/Documentation/SubmittingPatches&lt;/p&gt;
+</description>
+        <pubDate>Sun, 22 Jun 2014 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2014/06/22/git-commit-messages-as-documenation</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2014/06/22/git-commit-messages-as-documenation</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Best practices in modern web projects</title>
+        <description>&lt;p&gt;At &lt;a href=&quot;http://oktavilla.se&quot;&gt;Oktavilla&lt;/a&gt; we regularly start new projects. Over the years we have therefore come up with a few best practices to ensure that it is easy to take part in our projects and reduce errors. We use these in the majority of our projects, both internally and for clients. In the end we deliver high quality  web projects and this is one part of that process.&lt;/p&gt;
+
+&lt;p&gt;In this blog post I focus on a few practices related to the technical side of things. Like setup and what to think about when choosing tools and processes for a project. Each practice has a link or two in the end to resources with more information.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-readme-file&quot;&gt;The README file&lt;/h2&gt;
+
+&lt;p&gt;Let’s start out with the most important file in any project.&lt;/p&gt;
+
+&lt;p&gt;A project must have a README file in its root directory. It contains information on the project and how get started with it. A new team member should easily get a understanding of what this project is and how to get started working with it from reading this file.&lt;/p&gt;
+
+&lt;p&gt;When writing the README think of the reader as a novice with basic knowledge of programming environments. Format the text with &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;Markdown&lt;/a&gt; to make it easy for the reader to digest. Markdown is both easily read as source code and can be rendered as HTML (GitHub does this automatically for example).&lt;/p&gt;
+
+&lt;p&gt;A README should include at least the following sections:&lt;/p&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;A brief explanation of the projects purpose. Also include the projects role if it is a part of larger architecture, who the client might be and any other information that might be good to know at a introductory level.&lt;/p&gt;
+
+&lt;h3 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h3&gt;
+
+&lt;p&gt;Include a list of dependencies that need to be installed separately. For example: database servers, package managers and programming languages. Be sure to include what versions are required as well.&lt;/p&gt;
+
+&lt;h3 id=&quot;local-development-setup&quot;&gt;Local Development Setup&lt;/h3&gt;
+
+&lt;p&gt;Someone who is new to the project should easily understand how get to it up and running for local development using the README. Let the reader know what steps to take with a fresh copy of the project’s code. This can be notes on how to install needed packages, start the application and run the tests.&lt;/p&gt;
+
+&lt;p&gt;Use concrete examples like what to type into the shell to invoke the different tasks.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;/h3&gt;
+
+&lt;p&gt;If the application can be configured using environment variables include a list of these. Explain what each environment variable is used for.&lt;/p&gt;
+
+&lt;h3 id=&quot;deploy&quot;&gt;Deploy&lt;/h3&gt;
+
+&lt;p&gt;Part of working on a project is also being able to deploy your changes. Let the reader know how to deploy code to production and staging environments.&lt;/p&gt;
+
+&lt;p&gt;For example, if you use &lt;a href=&quot;http://heroku.com&quot;&gt;Heroku&lt;/a&gt;, include examples on how to set up the different Git remotes used for deployment and how to push code to these.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tom.preston-werner.com/2010/08/23/readme-driven-development.html&quot;&gt;Readme Driven Development&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://robots.thoughtbot.com/how-to-write-a-great-readme&quot;&gt;How To Write A Great README&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://zachholman.com/posts/documentation/&quot;&gt;The Most Important Code Isn’t Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;version-control-and-git&quot;&gt;Version Control and Git&lt;/h2&gt;
+
+&lt;p&gt;First of all, use version control. Second, use Git for version control. It is modern, works great and a majority of developers are either comfortable using it or want to start using it.&lt;/p&gt;
+
+&lt;h3 id=&quot;deployable-at-all-times&quot;&gt;Deployable at All Times&lt;/h3&gt;
+
+&lt;p&gt;Keep the master branch deployable at all times. Sooner or later you will get a bug reported on the code running in production that needs to be fixed right away. Keeping your current work in a separate branch allow you to quickly switch to the master branch and fix the bug. It also gives you the peace of mind to deploy without worrying about accidentally pushing any new and untested code to your users.&lt;/p&gt;
+
+&lt;h3 id=&quot;commit-messages&quot;&gt;Commit Messages&lt;/h3&gt;
+
+&lt;p&gt;Write informative commit messages. A good commit message includes a short title and a body. The title explains the purpose of the change and the body gives more information on why this change was needed. Think of commit messages as documentation of the code&lt;/p&gt;
+
+&lt;p&gt;If there is any extra information that might be useful for someone looking at the commit, include that in the body. For example, if there is a corresponding issue in your issue tracker be sure to include a reference to it.&lt;/p&gt;
+
+&lt;h3 id=&quot;pull-requests&quot;&gt;Pull Requests&lt;/h3&gt;
+
+&lt;p&gt;Use a web based Git hosting alternative like &lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; or &lt;a href=&quot;https://bitbucket.org/&quot;&gt;BitBucket&lt;/a&gt; that supports pull requests for branches. This let you tell other team members about code changes before they are merged into the master branch.&lt;/p&gt;
+
+&lt;p&gt;Use this for discussion and to spread knowledge about different parts of the code base by &lt;a href=&quot;http://en.wikipedia.org/wiki/Code_review&quot;&gt;code reviews&lt;/a&gt;. Code reviews can be both high level or very thorough. The important thing is that someone else other than the author takes a look at the changes and says “thumbs up” before the code is merged into the master.&lt;/p&gt;
+
+&lt;p&gt;Be open to discussion, but don’t let the review process hold back a merge to long. It is every team member’s responsibility to be keep the process quick and smooth within reasonable limits.&lt;/p&gt;
+
+&lt;p&gt;It is also a good idea to keep an extra friendly tone in the discussions to avoid misunderstandings and grief. Use &lt;a href=&quot;http://www.emoji-cheat-sheet.com/&quot;&gt;emojis&lt;/a&gt; to keep the discussion fun and productive.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://guides.github.com/introduction/flow/index.html&quot;&gt;Understanding the GitHub Flow&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=qyz3jkOBbQY&quot;&gt;How GitHub Uses GitHub to Build GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html&quot;&gt;A Note About Git Commit Messages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=Y1oNCb-S_aM&quot;&gt;Agile Development with Heroku Webinar&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;configuration-1&quot;&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Most applications have some kind of configuration. It can be a connection URL for a database, API credentials for external services or something else.&lt;/p&gt;
+
+&lt;p&gt;Unix-like operation systems have a great method for providing applications with configuration values at run time. It is called &lt;a href=&quot;http://en.wikipedia.org/wiki/Environment_variable&quot;&gt;environment variables&lt;/a&gt;. Use this and store all application configuration as environment variables.&lt;/p&gt;
+
+&lt;p&gt;Using environment variables allows for a separation of configuration from the code base. This makes it easy to change configuration values for a deployed application without updating any code.&lt;/p&gt;
+
+&lt;p&gt;A good goal is that the application can be open sourced at any time without compromising any credentials.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://12factor.net/config&quot;&gt;The twelve-factor app&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://devcenter.heroku.com/articles/config-vars&quot;&gt;Heroku dev center: Configuration and Config Vars&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;package-managers&quot;&gt;Package Managers&lt;/h2&gt;
+
+&lt;p&gt;All projects have some kind of external dependencies on libraries and most programming languages have at least one package manager to handle installation of these. For example ruby has &lt;a href=&quot;http://bundler.io/&quot;&gt;bundler&lt;/a&gt; and node.js has &lt;a href=&quot;https://www.npmjs.org/&quot;&gt;npm&lt;/a&gt;. Use a package manager and be sure to include the file that specifies package versions in the project.&lt;/p&gt;
+
+&lt;p&gt;Go through the list of dependencies once in a while and check which packages have been updated and if the update might be of interest. For example, you can do this easily with bundler using the command &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle outdated&lt;/code&gt; or with npm using &lt;code class=&quot;highlighter-rouge&quot;&gt;npm outdated&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A majority of “good” packages use &lt;a href=&quot;http://semver.org/&quot;&gt;semantic versioning&lt;/a&gt; which helps you understand what to expect from a new version of a package. It tells you if a version is backwards compatible, adds new features or just fixes bugs.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.nodejitsu.com/package-dependencies-done-right&quot;&gt;Package.json dependencies done right&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://semver.org/&quot;&gt;Semantic Versioning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;deploy-1&quot;&gt;Deploy&lt;/h2&gt;
+
+&lt;p&gt;The deploy procedure should be automated so it requires a minimum of human interaction. With the information from the README and correct credentials it should be a matter of running a command in the shell or pressing a button to put a new version of the application online.&lt;/p&gt;
+
+&lt;p&gt;Automation is important to avoid human errors. If there are any manual tasks involved with making a deploy, sooner or later someone will forget to do them or do them incorrectly. There can be bugs in deploy scripts but once they are discovered and fixed they will not happen again.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.startuplessonslearned.com/2009/06/why-continuous-deployment.html&quot;&gt;Why Continuous Deployment?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Continuous_delivery&quot;&gt;Continuous delivery&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;application-environments&quot;&gt;Application Environments&lt;/h2&gt;
+
+&lt;p&gt;An application should be capable of behaving differently depending of what environment it is running in.&lt;/p&gt;
+
+&lt;p&gt;Examples of different behaviours that depend on the current environment might be how much detail is displayed on error pages, what goes into log files, javascript minification or if the application should send e-mails. Using environments you get a common way to handle these special cases.&lt;/p&gt;
+
+&lt;p&gt;The default environments are &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;staging&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;. Development is the default mode that the application runs in when you run it locally. Test is the environment your tests run in. Staging and production are environments that the application runs in when deployed. The production environment is where the actual end users use the application and staging is a replica of production that is used to test changes before they are pushed to production.&lt;/p&gt;
+
+&lt;p&gt;The application picks up what environment to run in from an environment variable. These are usually called something like &lt;code class=&quot;highlighter-rouge&quot;&gt;NODE_ENV&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;RAILS_ENV&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://signalvnoise.com/posts/3535-beyond-the-default-rails-environments&quot;&gt;Beyond the default Rails environments&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://12factor.net/dev-prod-parity&quot;&gt;The Twelve-Factor App - Dev/prod parity&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;static-files-through-a-cdn&quot;&gt;Static Files Through a CDN&lt;/h2&gt;
+
+&lt;p&gt;Static files like images, fonts, CSS and Javascripts for production applications should not be served from the same server as the application to end users. Serve these through a content delivery network, CDN. They are built and optimised for serving static files to users all over the globe fast. A faster experience makes for happier users.&lt;/p&gt;
+
+&lt;p&gt;Getting your files on the CDN should be part of your automated deployment procedure. A common way to solve this is using a CDN with a custom origin set up and cache busting by file name. With this the application will add the CDN-host and a hash of the files contents to all files that should be served through the CDN when run in the production environment.&lt;/p&gt;
+
+&lt;p&gt;For example, a stylesheet link tag will look like this in the development environment:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/style.css&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And like this in production:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://my-cdn.com/style-a06ae46033959f7563b20c5faff6f5e60175253f.css&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;When the CDN gets a request for a file it is missing it will request and cache that file from the application. As the hash is unique to the file contents the CDN will always fetch the correct version as long as the app outputs correct links in the markup. This also requires the app to handle fetching of static files with a hash appended to the filename. This can be solved by either a simple route rewrite or a precompilation task run at deploy.&lt;/p&gt;
+
+&lt;p&gt;And, remember that Amazon S3 is not a CDN and should not be used as such. This is a common mistake. It is a service for storing files and is not optimised for delivery. &lt;a href=&quot;http://aws.amazon.com/cloudfront/&quot;&gt;CloudFront&lt;/a&gt; is the Amazon CDN offering.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://guides.rubyonrails.org/asset_pipeline.html&quot;&gt;The Rails Asset Pipeline&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/adunkman/connect-assets&quot;&gt;connect-assets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.montparnas.com/articles/more-evidence-that-speed-is-key-to-user-experience/&quot;&gt;More Evidence that Speed Is Key to User Experience&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;closing-thoughts&quot;&gt;Closing Thoughts&lt;/h2&gt;
+
+&lt;p&gt;All projects are different and of course the practices mentioned in this post are not valid for all projects. However, keeping a set of common practices for how to create, maintain and contribute to projects within an organisation makes things work smoother. It reduces setup time and makes it easy for new project members to start contributing. Just make sure that the documentation for your practices is alive and evolves over time.&lt;/p&gt;
+
+&lt;p class=&quot;notice&quot;&gt;&lt;strong&gt;Care about things like this?&lt;/strong&gt; We are currently looking for Javascript and Ruby developers with a keen eye for details to join our team at &lt;a href=&quot;http://oktavilla.se&quot;&gt;Oktavilla&lt;/a&gt;. &lt;a href=&quot;mailto:arvid.andersson@oktavilla.se&quot;&gt;Get in touch if you want to know more.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Many thanks to my colleagues &lt;a href=&quot;https://twitter.com/snurra&quot;&gt;Gustaf Forsslund&lt;/a&gt; and &lt;a href=&quot;https://twitter.com/alexisfellenius&quot;&gt;Alexis Fellenius&lt;/a&gt; for proofreading this blog post.&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Jun 2014 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2014/06/17/best-practices-in-modern-web-projects</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2014/06/17/best-practices-in-modern-web-projects</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Heroku process scheduling on the cheap</title>
+        <description>&lt;p&gt;Most web apps have different highs and lows of traffic during the day. Maybe you get most of your traffic during daytime and not so much during the night and early morning. If you have this kind of situation it can be a good idea to adjust your number of dynos according to the changes in traffic in order to save a few bucks. When this is done automatic it is sometimes called auto-scaling or process scheduling.&lt;/p&gt;
+
+&lt;p&gt;There are &lt;a href=&quot;https://addons.heroku.com/process-scheduler&quot;&gt;a few services&lt;/a&gt; that can do this for you. However it is pretty easy to setup by your self, just using Heroku and some ruby code. And it can be for free.&lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Each Heroku app gets &lt;a href=&quot;https://devcenter.heroku.com/articles/usage-and-billing#750-free-dyno-hours-per-app&quot;&gt;750 dyno-hours for free&lt;/a&gt; each month.&lt;/li&gt;
+  &lt;li&gt;Heroku offers a free cron-like add-on called &lt;a href=&quot;https://addons.heroku.com/scheduler&quot;&gt;Heroku Scheduler&lt;/a&gt; for running periodical tasks.&lt;/li&gt;
+  &lt;li&gt;With the &lt;a href=&quot;https://devcenter.heroku.com/articles/platform-api-reference&quot;&gt;Heroku API&lt;/a&gt; we easily can scale the number of dynos for our apps.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;putting-it-together&quot;&gt;Putting it together&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-scaling-utility-app&quot;&gt;The scaling utility app&lt;/h3&gt;
+
+&lt;p&gt;Create a new ruby project with a Gemfile:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://rubygems.org&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;ruby&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2.0.0&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;heroku-api&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Create a ruby file “scaler.rb” that handles the API interactions:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;bundler&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;optparse&quot;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Bundler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;heroku_api_key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;HEROKU_API_KEY&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;No Heroku API key env variable set&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;OptionParser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;banner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Usage: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ARGV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; [options]&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--app NAME&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-t&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--type DYNO_TYPE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;opts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--dynos NO_DYNOS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;parse!&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;OptionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MissingArgument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--app&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;nil?&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;OptionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MissingArgument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--type&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;nil?&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;OptionParser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MissingArgument&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--dynos&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;nil?&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;heroku&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Heroku&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;API&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;api_key: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heroku_api_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;heroku&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;post_ps_scale&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;deploying&quot;&gt;Deploying&lt;/h3&gt;
+
+&lt;p&gt;Create a new Heroku app and push the code:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;heroku apps:create my-auto-scaler
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Setup your Heroku API key as environment variable, you find this on &lt;a href=&quot;https://dashboard.heroku.com/account&quot;&gt;your account page&lt;/a&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;HEROKU_API_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;my-api-key&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Add the Heroku Scheduler add-on:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;heroku addons:add scheduler:standard&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Open up the schedulers setting page:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;heroku addons:open scheduler:standard&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Set up jobs for when your want to scale your app.&lt;/p&gt;
+
+&lt;p&gt;For example if you create a job with the task:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;ruby scaler.rb -a my-app -t web -d 3&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;.. and set the next run to 5:00 UTC. The number of web dynos for the app “my-app” will be scaled to 3 at 5:00 in the morning UTC.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-little-advice&quot;&gt;A little advice&lt;/h2&gt;
+
+&lt;p&gt;If you are planning on doing this on a production app make sure you got some error tracking to get alerted if the scheduled tasks has failed to run. It is mentioned in &lt;a href=&quot;https://devcenter.heroku.com/articles/scheduler&quot;&gt;the docs&lt;/a&gt; that “Scheduler is known to occasionally (but rarely) miss the execution of scheduled jobs”. For example I added &lt;a href=&quot;https://github.com/arvida/thief-in-the-night&quot;&gt;e-mail alerts and logging to StatHat&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 16 Aug 2013 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2013/08/16/heroku-process-scheduling-on-the-cheap</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2013/08/16/heroku-process-scheduling-on-the-cheap</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Sensitive data in git repositories</title>
+        <description>&lt;p&gt;The other day I got into a discussion about storing AWS credentials in a project’s git repository. The credentials were used for deploying a static site to S3 and the argument was that &lt;em&gt;”it makes it much easier to get started if the credentials already exists in the project when cloned, and as the repo is a private GitHub repository we don’t have to worry about any unauthorised access”&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Years of being forced to handle Ruby On Rails’s database.yml and similar files has made into a habit for me to always keep a projects credentials and sensitive data in separate files that are ignored by git. Approached with the above reasoning made me realise that I might live in a bit of a bubble when it comes to this. Coming from another background you might very well have a another view on how to handle credentials in projects.&lt;/p&gt;
+
+&lt;p&gt;I instinctively felt that the above approach was not ideal. Phrasing a sound explanation to why this is a bad idea took some time; the rest of this post is the arguments I came up with.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-is-this-important&quot;&gt;Why is this important?&lt;/h2&gt;
+
+&lt;p&gt;We owe it to our customers and our selves to do as much as is reasonably possible to ensure the security of data and credentials. The key way to do this is by minimizing the places where sensitive data exists. Every time you put the sensitive data somewhere you increase the chances of unauthorized access.&lt;/p&gt;
+
+&lt;p&gt;Once you have put sensitive data in a git repo it is going to stay in the repository’s history forever (&lt;a href=&quot;https://help.github.com/articles/remove-sensitive-data&quot;&gt;there are ways around this&lt;/a&gt;). You never know where a project folder might end up in the future. Stay safe and make it easy for yourself by handling things like this right from the start of a projects life.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; is a truly awesome service and I have much respect for it and the people behind it. Still I feel that it is unwise to put any sensitive data in code that is hosted on GitHub and similar services. The reason for this is that websites gets compromised, even &lt;a href=&quot;https://github.com/blog/1068-public-key-security-vulnerability-and-mitigation&quot;&gt;GitHub has been compromised&lt;/a&gt; in the past. It is better to minimize the impact if this happens in the future.&lt;/p&gt;
+
+&lt;p&gt;Another reason to keep sensitive data out of private repositories on services is external applications that have access to your repositories via for example &lt;a href=&quot;http://developer.github.com/v3/oauth/#scopes&quot;&gt;GitHub’s OAuth2 authentication&lt;/a&gt;. Some &lt;a href=&quot;http://airbrake.io&quot;&gt;of&lt;/a&gt; &lt;a href=&quot;http://tddium.com/&quot;&gt;the&lt;/a&gt; &lt;a href=&quot;http://prose.io/&quot;&gt;apps&lt;/a&gt; using GitHub’s API request permission to access your private repos. These are great services that have good intentions but once they have access to your private repositories they also introduce another way to get access your sensitive data if it is available in your git repository. Remember, these services can also get hacked.&lt;/p&gt;
+
+&lt;p&gt;Finally. Code and configuration (like credentials and sensitive data) is separate parts of a application and varies between different deployments like staging and production. It comes down to good design to keep these separate. The &lt;a href=&quot;http://www.12factor.net/&quot;&gt;12 Factor app method&lt;/a&gt; describes a great policy regarding this in &lt;a href=&quot;http://www.12factor.net/config&quot;&gt;the Config chapter&lt;/a&gt;: &lt;em&gt;”the litmus test is whether an app could be open sourced at any time without compromising any credentials”&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;handle-sensitive-data-in-a-project&quot;&gt;Handle sensitive data in a project&lt;/h2&gt;
+
+&lt;p&gt;The main idea is to keep files with sensitive data separate from files with your application code. The files containing credentials should be added to .gitignore to ensure that they are never accidentally committed. The application code then includes these files as they are needed.&lt;/p&gt;
+
+&lt;p&gt;The first time someone clones the project the cloner will need to setup these file with the required credentials. It is a good idea to provide templates for these files in the repository and to include some information on setup and where to find the credentials in the projects readme file. I also suggest using a service like &lt;a href=&quot;http://passpack.com/&quot;&gt;Passpack&lt;/a&gt; or &lt;a href=&quot;https://github.com/github/swordfish&quot;&gt;Swordfish&lt;/a&gt; to handle sharing of credentials and other sensitive data.&lt;/p&gt;
+
+&lt;p&gt;Another approach is to store your credentials in environment variables and use something like &lt;a href=&quot;https://github.com/bkeepers/dotenv&quot;&gt;dotenv&lt;/a&gt; to setup these when running locally. On the production server you have these setup automatically for the application when launched. Checkout out how &lt;a href=&quot;https://devcenter.heroku.com/articles/config-vars&quot;&gt;Heroku uses environment variables&lt;/a&gt; for application configuration for inspiration on this approach.&lt;/p&gt;
+
+&lt;h2 id=&quot;more-resources&quot;&gt;More resources&lt;/h2&gt;
+
+&lt;p&gt;Figaro is alternative to dotenv mentioned above&lt;br /&gt;
+&lt;a href=&quot;https://github.com/laserlemon/figaro&quot;&gt;https://github.com/laserlemon/figaro&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Econfig is a ruby gem for configuring Rails applications&lt;br /&gt;
+&lt;a href=&quot;https://github.com/elabs/econfig&quot;&gt;https://github.com/elabs/econfig&lt;/a&gt;&lt;/p&gt;
+
+&lt;div id=&quot;#gh-remove-sensitive-data&quot;&gt;&lt;/div&gt;
+&lt;p&gt;GitHub’s guide to removing accidentally commited sensitive data from a repository&lt;br /&gt;
+&lt;a href=&quot;https://help.github.com/articles/remove-sensitive-data&quot;&gt;https://help.github.com/articles/remove-sensitive-data&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;How GitHub was hacked last year&lt;br /&gt;
+&lt;a href=&quot;https://gist.github.com/peternixey/1978249&quot;&gt;https://gist.github.com/peternixey/1978249&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Super thanks to &lt;a href=&quot;http://lexi.se&quot;&gt;Alexis Fellenius&lt;/a&gt; for proofreading this blog post.&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Jun 2013 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2013/06/10/credentials-in-git-repos</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2013/06/10/credentials-in-git-repos</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Open up rubygems.org from Vim</title>
+        <description>&lt;p&gt;One thing I find my self doing a couple of times every week is browsing a Gemfile for a project and wanting to checkout the &lt;a href=&quot;http://rubygems.org&quot;&gt;rubygems.org&lt;/a&gt; page for a gem. Sometimes I want to see what versions are available, the docs or checkout the project on GitHub.&lt;/p&gt;
+
+&lt;p&gt;A couple of months back I decided to write a little Vim plugin to save myself a couple of key strokes the next time I want to open up a gems page.&lt;/p&gt;
+
+&lt;p&gt;Here is a demo:&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/64759071&quot; width=&quot;100%&quot; height=&quot;420&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The plugin adds a command to Vim called &lt;code class=&quot;highlighter-rouge&quot;&gt;:Gem&lt;/code&gt;. The command basically takes the current word under the cursor and assumes it is a gem name and opens up &lt;code class=&quot;highlighter-rouge&quot;&gt;http://rubygems.org/gems/&amp;lt;GEMNAME&amp;gt;&lt;/code&gt; in the browser. Currently it only works on Mac OS X as it uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;open&lt;/code&gt; shell command.&lt;/p&gt;
+
+&lt;p&gt;Pretty simple stuff, but it does the job for me.&lt;/p&gt;
+
+&lt;p&gt;Installation instructions and the minimal Vim script code is available on GitHub at &lt;a href=&quot;https://github.com/arvida/vim-open-rubygems&quot;&gt;github.com/arvida/vim-open-rubygems&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 25 Apr 2013 00:00:00 +0200</pubDate>
+        <link>http://blog.arvidandersson.se/2013/04/25/open-rubygems-org-from-vim</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2013/04/25/open-rubygems-org-from-vim</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Clr.yt - minimal color picker</title>
+        <description>&lt;p&gt;As a web developer you learn pretty fast how to describe a color using HEX or RGB values, for example &lt;code class=&quot;highlighter-rouge&quot;&gt;#ff0000&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;255, 0, 0&lt;/code&gt; is the code for red. However getting the color tone right can be a bit tricky without using a visual color picker.&lt;/p&gt;
+
+&lt;p&gt;My process for finding the right color has usually been to google something like “html color picker” or opening up a image editor. Related to this also the communciation problems when you are helping someone tweak a design from remote and they describe a color like “blue, the same shade as my guitar”.&lt;/p&gt;
+
+&lt;p&gt;I decided to try and make something that would make this color stuff easier. Last week I put in a couple of hours and created yet another web based color picker. It is available at &lt;strong&gt;&lt;a href=&quot;http://clr.yt/&quot;&gt;http://clr.yt&lt;/a&gt;&lt;/strong&gt;. You can easily copy color codes or share colors using anchor links like this: &lt;a href=&quot;http://clr.yt/#cc0000&quot;&gt;http://clr.yt/#cc0000&lt;/a&gt;. It is very basic but does the job for me and hopefully someone else.&lt;/p&gt;
+
+&lt;p&gt;Let me know what you think about it or how it could be improved.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dl.dropbox.com/u/275874/blog/clr-yt.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Clr.yt uses an iOS compatible version of &lt;a href=&quot;https://github.com/F1LT3R/farbtastic-color-picker&quot;&gt;farbtastic&lt;/a&gt; and &lt;a href=&quot;https://github.com/jonrohan/ZeroClipboard&quot;&gt;ZeroClipboard&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Nov 2012 00:00:00 +0100</pubDate>
+        <link>http://blog.arvidandersson.se/2012/11/11/clr-yt-minimal-color-picker</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2012/11/11/clr-yt-minimal-color-picker</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>How to install Ruby 2.0 (ruby-head) with RVM</title>
+        <description>&lt;p&gt;I got a bit excited when I read about the &lt;a href=&quot;http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-dev/46258?utm_source=rubyweekly&amp;amp;utm_medium=email&quot;&gt;Ruby 2.0.0 ‘Feature Freeze’&lt;/a&gt; and wanted to give ruby 2.0 a test.&lt;/p&gt;
+
+&lt;p&gt;This is what I did to get it installed on Mac OS X 10.8.2 with &lt;a href=&quot;http://rvm.beginrescueend.com/&quot;&gt;RVM&lt;/a&gt; (and &lt;a href=&quot;http://mxcl.github.com/homebrew/&quot;&gt;Homebrew&lt;/a&gt;).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew install autoconf
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew install automake
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew install libyaml
+
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;rvm install ruby-head&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;To use it you just have to tell RVM to use it:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;rvm use ruby-head
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby --version
+ruby 2.0.0dev &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2012-10-12 trunk 37163&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x86_64-darwin12.2.0]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;When it is installed you can for example test out named arguments:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# named_arguments.rb&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;name: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'world'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hello &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;name: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'boss'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby named_arguments.rb
+hello boss&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;read-more-about-ruby-20&quot;&gt;Read more about Ruby 2.0&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bugs.ruby-lang.org/projects/ruby-trunk/roadmap#2.0.0&quot;&gt;Ruby 2.0 feature list&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kresimirbojcic.com/2012/08/23/things-to-look-forward-to-in-ruby-2-dot-0.html&quot;&gt;Things to Look
+Forward to in Ruby 2.0&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tenderlovemaking.com/2012/09/07/protected-methods-and-ruby-2-0.html&quot;&gt;PROTECTED METHODS AND RUBY 2.0&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0&quot;&gt;Why You Should Be Excited About Garbage Collection in Ruby 2.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 29 Oct 2012 00:00:00 +0100</pubDate>
+        <link>http://blog.arvidandersson.se/2012/10/29/installing-ruby-2-0-with-rvm</link>
+        <guid isPermaLink="true">http://blog.arvidandersson.se/2012/10/29/installing-ruby-2-0-with-rvm</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

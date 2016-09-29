@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Recent open source commits</title>
+  <meta name="description" content="Last week I did two small commits on a project called mongo_session_store. It’s a Rails session store that uses mongo_mapper, mongoid or the mongo ruby drive...">
+  <meta name="google-site-verification" content="hSpvUvfiI4gbjIkE-nZd8otj75nYYr3bjL0kiNH1osg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Shanti' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://blog.arvidandersson.se/2011/09/23/recent-open-source-commits">
+  <link rel="alternate" type="application/rss+xml" title="waiworinao ★ notes by arvid andersson" href="http://blog.arvidandersson.se/feed.xml" />
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">waiworinao ★ notes by arvid andersson</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        <a class="page-link" href="http://arvidandersson.se">About</a>
+        <a class="page-link" href="https://twitter.com/arvid_a">@arvid_a</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Recent open source commits</h1>
+    <p class="post-meta">Sep 23, 2011</p>
+  </header>
+
+  <article class="post-content">
+    <p>Last week I did two small commits on a project called <a href="https://github.com/brianhempel/mongo_session_store">mongo_session_store</a>. 
+It’s a Rails session store that uses mongo_mapper, mongoid or the mongo ruby driver to store session data in a mongodb database.
+It was started out by <a href="https://github.com/compressed/mongo_session_store">compressed</a> about two years ago and has had a lot of forks,
+many looks unmaintained. <a href="https://github.com/brianhempel">Brian Hempel</a> has a fork that works good with Rails 3.x and that he is 
+actively maintaining. Brian has also released it as gem called <a href="https://rubygems.org/gems/mongo_session_store-rails3">mongo_session_store-rails3</a>, 
+that we’re currently using for <a href="http://unicef.se">the swedish UNICEF site</a>.</p>
+
+<h3>My commits</h3>
+
+<p><a href="https://github.com/brianhempel/mongo_session_store/commit/582154476b28f2b0e59c17e6649cfb8078dec13f">582154476b28f2b0e59c17e6649cfb8078dec13f</a>
+ - There was an error in a example in the readme on how you set the <code>config.session_store</code> setting. When setting sessions store your
+can’t assign the store with a <code>=</code>.</p>
+
+<p><a href="https://github.com/brianhempel/mongo_session_store/commit/66baa116fe3be42f89a234ac2436c02ff717b9b4">66baa116fe3be42f89a234ac2436c02ff717b9b4</a>
+ - I also replaced a few <code>rescue LoadError</code> with <code>autoload</code>. It makes the code a bit cleaner and don’t make you require 
+ files that you won’t be using.</p>
+
+  </article>
+
+
+  <div id="disqus_thread" style="clear:both;"></div>
+  <script type="text/javascript" src="http://disqus.com/forums/blog-arvidandersson/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/blog-arvidandersson/?url=ref">View the discussion thread.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p>waiworinao ★ a blog by <a href="http://arvidandersson.se/">Arvid Andersson</a></p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-20637790-3', 'arvidandersson.se');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+
+</html>
