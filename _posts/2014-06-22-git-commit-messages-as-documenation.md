@@ -1,5 +1,6 @@
 ---
 title: Git commit messages as documentation
+published: false
 ---
 
 Code is all about communicating with your computer and tell it what you want it to do. We also use it to tell our colleagues what we want the computer to do. That is why we invented programming languages that are similar to our human languages.
