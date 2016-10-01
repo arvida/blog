@@ -84,8 +84,6 @@ I think the main thing is to realize what a fantastic tool git is and how we can
 
 # Resources
 
-Tim Pope: "A Note About Git Commit Messages"
-http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+[Tim Pope: "A Note About Git Commit Messages"](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
 
-Guidelines for making patched to Git
-http://git.kernel.org/cgit/git/git.git/tree/Documentation/SubmittingPatches
+[Guidelines for making patched to Git](http://git.kernel.org/cgit/git/git.git/tree/Documentation/SubmittingPatches)
