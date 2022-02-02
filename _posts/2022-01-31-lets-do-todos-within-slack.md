@@ -3,7 +3,7 @@ title: Manage tasks in Slack with Let's Do
 ---
 
 <p style="font-size: 14px; font-style: italic;">
-<strong>TLDR:</strong> I am building an app to manage to-dos within Slack. It is called <a href="https://www.letsdo.io">Let's Do</a>.
+<strong>TLDR:</strong> I am building an app to <a href="https://www.letsdo.io">manage to-dos within Slack</a>. It is called <a href="https://www.letsdo.io">Let's Do</a>.
 </p>
 
 __I have used loads of task management tools on various platforms over the years. Sometimes, more advanced systems like Jira, PivotalTracker, or Trello make sense. Other times you just want a list of tasks shared with other people.__
