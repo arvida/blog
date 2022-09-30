@@ -19,4 +19,4 @@ It is a great feeling when you finally tick one off, and realize that you made i
 For me it has been key to keep the milestones tangible and business-oriented. More practical like ”finish MVP” or ”submit for review” doesn’t have the same bang to me. I think that type can get too practical and reaching them is more like completing a task than reaching a goal.
 When there are effects like money in the bank, accountability or customer data in the DB, it gets real in another way. And that gets you focused.
 
-I have been using this method in for different projects over the years, and it has been good way to keep focus be reminided on what is important.
+I have been using this method for different projects over the years, and it has been a good way to keep focus and be reminded of what is important. Simple yet effective.
